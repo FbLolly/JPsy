@@ -1,4 +1,4 @@
-package entityPkg;
+package GameObjectPkg;
 
 import java.awt.Graphics;
 
@@ -24,6 +24,9 @@ public class MapObject extends GameObject {
     }
 
     public void paintComponent(Graphics g, ImageList imageList){
+        if (this.outsideCamera())
+            return;
+        
         g.drawImage(imageList.getImages(""+this.type).get(0), (int)this.x, (int)this.y, null);
     }
 }

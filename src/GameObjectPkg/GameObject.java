@@ -1,8 +1,9 @@
-package entityPkg;
+package GameObjectPkg;
 
 import java.awt.Graphics;
 
 import graphicsPkg.ImageList;
+import mainPkg.Defines;
 import utilsPkg.RayPoint;
 import utilsPkg.RayRectangle;
 
@@ -21,7 +22,19 @@ public class GameObject {
 
     }
 
+    public boolean outsideCamera(){
+        if (this.x < -Defines.cameraX || this.y < -Defines.cameraY)
+            return true;
+        if (this.x > -Defines.cameraX + Defines.width || this.y > -Defines.cameraY + Defines.height)
+            return true;
+
+        return false;
+    }
+
     public void paintComponent(Graphics g, ImageList imageList){
+        if (this.outsideCamera())
+            return;
+
         g.drawImage(imageList.getImages("0").get(0), (int)this.x, (int)this.y, null);
     }
 

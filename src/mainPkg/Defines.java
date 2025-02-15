@@ -22,4 +22,7 @@ public class Defines {
 
 	public static int mapSizeX = 50;
 	public static int mapSizeY = 50;
+
+	public static int cameraX = 0;
+	public static int cameraY = 0;
 }

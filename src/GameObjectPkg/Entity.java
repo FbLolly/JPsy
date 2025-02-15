@@ -1,4 +1,4 @@
-package entityPkg;
+package GameObjectPkg;
 
 public abstract class Entity extends GameObject {
     private double speedX;

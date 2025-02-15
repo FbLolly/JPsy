@@ -5,8 +5,8 @@ import java.awt.Point;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import entityPkg.MapObject;
-import entityPkg.Player;
+import GameObjectPkg.MapObject;
+import GameObjectPkg.Player;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
 import utilsPkg.RayPoint;

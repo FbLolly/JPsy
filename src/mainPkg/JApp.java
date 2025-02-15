@@ -12,7 +12,7 @@ import java.io.InputStream;
 
 import javax.swing.JPanel;
 
-import entityPkg.Player;
+import GameObjectPkg.Player;
 import gameManagement.Dialogue;
 import gameManagement.Map;
 import graphicsPkg.ImageList;
@@ -60,9 +60,11 @@ public class JApp extends JPanel implements Runnable{
 
 		this.setDoubleBuffered(true);
 		this.setPreferredSize(new Dimension(Defines.width, Defines.height));
-		this.setSize(new Dimension(Defines.width, Defines.height));
 		this.addMouseListener(mouse);
 		this.setFocusable(true);
+
+		this.setSize(new Dimension(Defines.width, Defines.height));
+		this.setBounds(0, 0, Defines.width, Defines.height);
 		this.setVisible(true);
 
 		this.imageList = new ImageList();

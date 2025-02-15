@@ -2,7 +2,7 @@ package utilsPkg;
 
 import java.awt.Graphics2D;
 
-import entityPkg.GameObject;
+import GameObjectPkg.GameObject;
 import mainPkg.Defines;
 
 public class Camera{
@@ -22,8 +22,14 @@ public class Camera{
 
     public void translate(Graphics2D g){
         g.translate(this.x, this.y);
+
+        Defines.cameraX = (int) this.x;
+        Defines.cameraY = (int) this.y;
     }
     public void untranslate(Graphics2D g){
         g.translate(-this.x, -this.y);
+
+        Defines.cameraX = (int) this.x;
+        Defines.cameraY = (int) this.y;
     }
 }

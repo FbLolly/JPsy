@@ -7,6 +7,7 @@ public class Main {
 		JFrame frame = new JFrame("JHorror");
 		
 		frame.setResizable(false);
+		frame.setBounds(0, 0, Defines.width, Defines.height);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(new JApp());

@@ -1,4 +1,4 @@
-package entityPkg;
+package GameObjectPkg;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;

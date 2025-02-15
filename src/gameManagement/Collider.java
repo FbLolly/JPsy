@@ -3,7 +3,7 @@ package gameManagement;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import entityPkg.Player;
+import GameObjectPkg.Player;
 import utilsPkg.RayRectangle;
 
 public class Collider {
