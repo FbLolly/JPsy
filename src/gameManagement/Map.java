@@ -7,7 +7,9 @@ import java.util.Scanner;
 
 import entityPkg.MapObject;
 import entityPkg.Player;
+import graphicsPkg.ImageList;
 import mainPkg.Defines;
+import utilsPkg.RayPoint;
 
 public class Map {
     protected MapObject map[][];
@@ -21,7 +23,7 @@ public class Map {
 
         for (int i = 0; i < Defines.mapSizeX; i++){
             for (int ii = 0; ii < Defines.mapSizeY; ii++){
-                map[i][ii] = new MapObject(i*Defines.tileSize, ii*Defines.tileSize, Defines.tileSize, Defines.tileSize, true);
+                map[i][ii] = new MapObject(i*Defines.tileSize, ii*Defines.tileSize, Defines.tileSize, Defines.tileSize, true, 1);
                 existance[i][ii] = false;
             }
         }
@@ -53,11 +55,15 @@ public class Map {
 
         for (int i = 0; i < height; i++){
             for (int ii = 0; ii < width; ii++){
-                map[ii][i] = new MapObject(ii*Defines.tileSize, i*Defines.tileSize, Defines.tileSize, Defines.tileSize, true);
+                map[ii][i] = new MapObject(ii*Defines.tileSize, i*Defines.tileSize, Defines.tileSize, Defines.tileSize, true, 0);
                 existance[ii][i] = false;
 
-                if (scan.nextInt() == 1)
+                int next = scan.nextInt();
+
+                if (next != 0){
                     existance[ii][i] = true;
+                    map[ii][i].type = next;
+                }
             }
         }
 
@@ -71,16 +77,16 @@ public class Map {
             }
         }
 
-        Collider.manageCollisions(this, player, player.map);
+        Collider.manageCollisions(this, player);
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g, ImageList imageList){
         for (int i = 0; i < Defines.mapSizeX; i++){
             for (int ii = 0; ii < Defines.mapSizeY; ii++){
                 if (!existance[i][ii])
                     continue;
 
-                map[i][ii].paintComponent(g);
+                map[i][ii].paintComponent(g, imageList.getImages("" + this.map[i][ii].type).get(0));
             }
         }
     }
@@ -92,6 +98,19 @@ public class Map {
             return false;
 
         return true;
+    }
+
+    public RayPoint getFirstFree(){
+        for (int i = 0; i < Defines.mapSizeX; i++){
+            for (int ii = 0; ii < Defines.mapSizeY; ii++){
+                if (this.existance[i][ii])
+                    continue;
+
+                return new RayPoint(i*Defines.tileSize, ii*Defines.tileSize);
+            }
+        }
+
+        return null;
     }
 
     public static Point getPointFromMapPos(int i, int ii){

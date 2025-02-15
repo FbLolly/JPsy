@@ -10,25 +10,28 @@ import java.awt.Toolkit;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 import javax.swing.JPanel;
 
 import entityPkg.Player;
 import gameManagement.Dialogue;
 import gameManagement.Map;
+import graphicsPkg.ImageList;
 import utilsPkg.Camera;
 import utilsPkg.KeyHandler;
 import utilsPkg.Mouse;
+import utilsPkg.RayPoint;
 
 public class JApp extends JPanel implements Runnable{
 	private double drawInterval;
 	private double nextDrawTime;
 	private double remainingTime;
+	@SuppressWarnings("unused")
 	private long timer;
 
 	private Player player;
 	private Map map;
 	private Camera cam;
+	private ImageList imageList;
 	
 	private Thread thread;
 	private KeyHandler keyHandler;
@@ -62,10 +65,14 @@ public class JApp extends JPanel implements Runnable{
 		this.setFocusable(true);
 		this.setVisible(true);
 
-		this.player = new Player(0, 0, Defines.tileSize, Defines.tileSize);
+		this.imageList = new ImageList();
+
 		this.cam = new Camera(0, 0);
 		this.map = new Map("standard");
 		this.dialogue = new Dialogue("1");
+
+		RayPoint firstFree = this.map.getFirstFree();
+		this.player = new Player(firstFree.x, firstFree.y, Defines.tileSize, Defines.tileSize);
 		
 		this.startGame();
 	}
@@ -137,10 +144,10 @@ public class JApp extends JPanel implements Runnable{
 
 		dialogue.update(this.keyHandler.KeyMap);
 
+		cam.update(player);
 		player.loadInput(this.keyHandler.KeyMap);
 		player.update();
 
-		cam.update(player);
 		map.update(player);
 	}
 	
@@ -152,8 +159,9 @@ public class JApp extends JPanel implements Runnable{
 
 		cam.translate((Graphics2D) g);
 
-		map.paintComponent(g);
+
 		player.paintComponent(g);
+		map.paintComponent(g, imageList);
 		dialogue.paintComponent(g, cam);
 		
 		cam.untranslate((Graphics2D) g);

@@ -1,14 +1,13 @@
 package entityPkg;
 
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.HashMap;
 
-import gameManagement.Map;
 import mainPkg.Defines;
 
 public class Player extends Entity {
     public HashMap<String, Integer> map;
+    private double prevx, prevy;
     
     public Player(double x, double y, double width, double height) {
         super(x, y, width, height);
@@ -18,78 +17,47 @@ public class Player extends Entity {
         this.map = map;
     }
 
+    public void updatePos(){
+        this.setSpeedX(0);
+        this.setSpeedY(0);
+
+        if (this.map.get("W") == 1){
+            this.setSpeedY(-Defines.defaultSpeed);
+            return;
+        }
+        if (this.map.get("S") == 1){
+            this.setSpeedY(Defines.defaultSpeed);
+            return;
+        }
+
+        if (this.map.get("A") == 1){
+            this.setSpeedX(-Defines.defaultSpeed);
+            return;
+        }
+        if (this.map.get("D") == 1){
+            this.setSpeedX(Defines.defaultSpeed);
+            return;
+        }
+    }
+
     @Override
     public void update(){
         //updates player pos (and speed) with input
         if (this.map == null)
             return;
 
-        this.setSpeedX(0);
-        this.setSpeedY(0);
+        prevx = this.getX();
+        prevy = this.getY();
 
-        if (this.map.get("W") == 1){
-            this.setSpeedY(-Defines.defaultSpeed);
-        }
-        if (this.map.get("S") == 1){
-            this.setSpeedY(Defines.defaultSpeed);
-        }
-
-        if (this.map.get("A") == 1){
-            this.setSpeedX(-Defines.defaultSpeed);
-        }
-        if (this.map.get("D") == 1){
-            this.setSpeedX(Defines.defaultSpeed);
-        }
+        updatePos();
 
         super.update();
     }
 
-    public void roundToClosestTileX(){
-        double posx;
-
-        Point defaultPoint = Map.getMapPosFromPoint(x, y);
-
-        posx = this.x / Defines.tileSize;
-        posx -= (double)((int)(posx));
-
-        if (posx > 0.5){
-            defaultPoint.x += 1;
-        }
-
-        this.x = defaultPoint.x*Defines.tileSize;
-    }
-
-    public void roundToClosestTileY(){
-        double posy;
-
-        Point defaultPoint = Map.getMapPosFromPoint(x, y);
-
-        posy = this.y / Defines.tileSize;
-        posy -= (double)((int)(posy));
-
-        if (posy > 0.5){
-            defaultPoint.y += 1;
-        }
-
-        this.y = defaultPoint.y*Defines.tileSize;
-    }
-
-    public void roundToClosestTile(){
-        this.roundToClosestTileX();
-        this.roundToClosestTileY();
-    }
-
     public void automaticRound(Rectangle rect){
-        if (rect.width <= 3){
-            this.roundToClosestTileX();
-            return;
-        }
-
-        if (rect.height <= 3){
-            this.roundToClosestTileY();
-            return;
-        }
-
-        this.roundToClosestTile();
+        if (rect.width > 3)
+            this.y = this.prevy;
+        if (rect.height > 3)
+            this.x = this.prevx;
     }
 }

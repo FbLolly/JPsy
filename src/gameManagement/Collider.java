@@ -2,13 +2,12 @@ package gameManagement;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.HashMap;
 
 import entityPkg.Player;
 import utilsPkg.RayRectangle;
 
 public class Collider {
-    public static void manageCollisions(Map map, Player player, HashMap<String, Integer> inputMap){
+    public static void manageCollisions(Map map, Player player){
         Point p;
         RayRectangle playerRect;
 

@@ -91,7 +91,7 @@ public class Dialogue {
             counter += 1;
         }
 
-        height = (int)((Defines.fontSize)*(counter+2));
+        height = (int)((Defines.fontSize + Defines.width/180)*(counter+1));
     }
 
     public void update(HashMap<String, Integer> map){
@@ -121,7 +121,7 @@ public class Dialogue {
         g.setColor(Color.black);
 
         int posX = Defines.width/80;
-        int posY = Defines.height - height;
+        int posY = Defines.height - height + Defines.width/160;
         for (int i = 0; i < showing.length(); i++){
             if ((showing.charAt(i) == ' ' && posX > Defines.width - Defines.width/20) || showing.charAt(i) == '@'){
                 posY += Defines.width/320 + Defines.fontSize;
