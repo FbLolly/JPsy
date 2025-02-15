@@ -25,8 +25,6 @@ public class JApp extends JPanel implements Runnable{
 	private double drawInterval;
 	private double nextDrawTime;
 	private double remainingTime;
-	@SuppressWarnings("unused")
-	private long timer;
 
 	private Player player;
 	private Map map;
@@ -46,7 +44,6 @@ public class JApp extends JPanel implements Runnable{
 		this.keyHandler = new KeyHandler();
 		this.mouse = new Mouse();
 
-		this.timer = 0;
 		this.isWindows();
 		
 		try {
@@ -120,7 +117,7 @@ public class JApp extends JPanel implements Runnable{
 		drawInterval = 1000000000/Defines.FPS;
     	nextDrawTime = System.nanoTime() + drawInterval;
     	remainingTime = 0;
-    	timer = 0;
+    	Defines.timer = 0;
     	
     	while (thread != null) {
         	getNewTimeAndSleep();
@@ -132,7 +129,9 @@ public class JApp extends JPanel implements Runnable{
 				Toolkit.getDefaultToolkit().sync();
 			}
 			
-    		timer += 1;
+			if (Defines.timer > 60)
+				Defines.timer = 0;
+    		Defines.timer += 1;
     	}
 	}
 
@@ -158,6 +157,11 @@ public class JApp extends JPanel implements Runnable{
 		g.setColor(Color.black);
 		g.fillRect(0, 0, Defines.width, Defines.height);
 		//-
+
+		if (Defines.fontMetrics == null){
+			Defines.fontMetrics = g.getFontMetrics();
+			dialogue.updateShowing();
+		}
 
 		cam.translate((Graphics2D) g);
 

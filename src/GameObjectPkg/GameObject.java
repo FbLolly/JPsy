@@ -23,7 +23,7 @@ public class GameObject {
     }
 
     public boolean outsideCamera(){
-        if (this.x < -Defines.cameraX || this.y < -Defines.cameraY)
+        if (this.x < -Defines.cameraX - Defines.tileSize || this.y < -Defines.cameraY - Defines.tileSize)
             return true;
         if (this.x > -Defines.cameraX + Defines.width || this.y > -Defines.cameraY + Defines.height)
             return true;
@@ -34,8 +34,8 @@ public class GameObject {
     public void paintComponent(Graphics g, ImageList imageList){
         if (this.outsideCamera())
             return;
-
-        g.drawImage(imageList.getImages("0").get(0), (int)this.x, (int)this.y, null);
+        
+        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("0")), (int)this.x, (int)this.y, null);
     }
 
     public RayPoint getPoint(){

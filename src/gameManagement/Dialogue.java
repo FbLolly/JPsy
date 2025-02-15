@@ -81,13 +81,24 @@ public class Dialogue {
             return;
         }
 
+        if (Defines.fontMetrics == null) return;
+
         this.showing = this.names.get(showingIdx) + "@@" + this.dialogue.get(showingIdx);
 
         int counter = 0;
+        int posX = Defines.width/80;
         for (int i = 0; i < this.showing.length(); i++){
+            if ((showing.charAt(i) == ' ' && posX > Defines.width - Defines.width/20)){
+                posX = Defines.width/80;
+
+                showing = showing.substring(0, i-1) + "@" + showing.substring(i+1, showing.length());
+                counter += 1;
+            }
+            posX += Defines.fontMetrics.stringWidth("" + showing.charAt(i));
+
             if (this.showing.charAt(i) != '@')
                 continue;
-            
+
             counter += 1;
         }
 
@@ -123,7 +134,7 @@ public class Dialogue {
         int posX = Defines.width/80;
         int posY = Defines.height - height + Defines.width/160;
         for (int i = 0; i < showing.length(); i++){
-            if ((showing.charAt(i) == ' ' && posX > Defines.width - Defines.width/20) || showing.charAt(i) == '@'){
+            if (showing.charAt(i) == '@'){
                 posY += Defines.width/320 + Defines.fontSize;
                 posX = Defines.width/80;
                 continue;
@@ -134,7 +145,7 @@ public class Dialogue {
 
             g.drawString("" + showing.charAt(i), posX, posY);
 
-            posX += g.getFontMetrics().stringWidth("" + showing.charAt(i));
+            posX += Defines.fontMetrics.stringWidth("" + showing.charAt(i));
         }
 
         cam.translate((Graphics2D) g);

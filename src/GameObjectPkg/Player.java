@@ -64,6 +64,6 @@ public class Player extends Entity {
     }
 
     public void paintComponent(Graphics g, ImageList imageList){
-        g.drawImage(imageList.getImages("player").get(0), (int)this.x, (int)this.y, null);
+        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("player")), (int)this.x, (int)this.y, null);
     }
 }

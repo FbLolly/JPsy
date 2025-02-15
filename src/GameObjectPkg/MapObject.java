@@ -3,6 +3,7 @@ package GameObjectPkg;
 import java.awt.Graphics;
 
 import graphicsPkg.ImageList;
+import mainPkg.Defines;
 
 public class MapObject extends GameObject {
     private boolean collidable;
@@ -27,6 +28,6 @@ public class MapObject extends GameObject {
         if (this.outsideCamera())
             return;
         
-        g.drawImage(imageList.getImages(""+this.type).get(0), (int)this.x, (int)this.y, null);
+        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(""+this.type)), (int)this.x, (int)this.y, null);
     }
 }
