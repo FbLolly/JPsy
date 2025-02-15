@@ -1,8 +1,8 @@
 package entityPkg;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
+import graphicsPkg.ImageList;
 import utilsPkg.RayPoint;
 import utilsPkg.RayRectangle;
 
@@ -21,9 +21,8 @@ public class GameObject {
 
     }
 
-    public void paintComponent(Graphics g){
-        g.setColor(Color.white);
-        g.fillRect((int)this.x, (int)this.y, (int)this.width, (int)this.height);
+    public void paintComponent(Graphics g, ImageList imageList){
+        g.drawImage(imageList.getImages("0").get(0), (int)this.x, (int)this.y, null);
     }
 
     public RayPoint getPoint(){

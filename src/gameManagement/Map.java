@@ -86,7 +86,7 @@ public class Map {
                 if (!existance[i][ii])
                     continue;
 
-                map[i][ii].paintComponent(g, imageList.getImages("" + this.map[i][ii].type).get(0));
+                map[i][ii].paintComponent(g, imageList);
             }
         }
     }

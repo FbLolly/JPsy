@@ -33,7 +33,9 @@ public class ImageList {
 
             try{
                 imageMap.get(what).add(ImageIO.read(is));
-            }catch(IOException e){}
+            }catch(IOException e){
+                break;
+            }
 
             idx++;
         }while (is != null);

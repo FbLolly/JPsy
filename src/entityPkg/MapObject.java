@@ -1,7 +1,8 @@
 package entityPkg;
 
 import java.awt.Graphics;
-import java.awt.Image;
+
+import graphicsPkg.ImageList;
 
 public class MapObject extends GameObject {
     private boolean collidable;
@@ -22,7 +23,7 @@ public class MapObject extends GameObject {
         this.collidable = collidable;
     }
 
-    public void paintComponent(Graphics g, Image i){
-        g.drawImage(i, (int)this.x, (int)this.y, null);
+    public void paintComponent(Graphics g, ImageList imageList){
+        g.drawImage(imageList.getImages(""+this.type).get(0), (int)this.x, (int)this.y, null);
     }
 }

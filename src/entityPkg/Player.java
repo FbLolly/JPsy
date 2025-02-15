@@ -1,8 +1,10 @@
 package entityPkg;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.HashMap;
 
+import graphicsPkg.ImageList;
 import mainPkg.Defines;
 
 public class Player extends Entity {
@@ -59,5 +61,9 @@ public class Player extends Entity {
             this.y = this.prevy;
         if (rect.height > 3)
             this.x = this.prevx;
+    }
+
+    public void paintComponent(Graphics g, ImageList imageList){
+        g.drawImage(imageList.getImages("player").get(0), (int)this.x, (int)this.y, null);
     }
 }

@@ -160,7 +160,7 @@ public class JApp extends JPanel implements Runnable{
 		cam.translate((Graphics2D) g);
 
 
-		player.paintComponent(g);
+		player.paintComponent(g, imageList);
 		map.paintComponent(g, imageList);
 		dialogue.paintComponent(g, cam);
 		
