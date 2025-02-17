@@ -27,6 +27,8 @@ public class KeyHandler {
 		KeyMap.put("BACK_SPACE", 0);
 		KeyMap.put("ENTER", 0);
 		KeyMap.put("ESCAPE", 0);
+		KeyMap.put("SHIFT", 0);
+		KeyMap.put("SPACE", 0);
 	}
 	
 	private void buildKeyMap(JPanel panel){
@@ -44,6 +46,10 @@ public class KeyHandler {
 		panel.getInputMap(Defines.IFW).put(KeyStroke.getKeyStroke("released ENTER"), "released ENTER");
 		panel.getInputMap(Defines.IFW).put(KeyStroke.getKeyStroke("ESCAPE"), "ESCAPE");
 		panel.getInputMap(Defines.IFW).put(KeyStroke.getKeyStroke("released ESCAPE"), "released ESCAPE");
+		panel.getInputMap(Defines.IFW).put(KeyStroke.getKeyStroke("SHIFT"), "SHIFT");
+		panel.getInputMap(Defines.IFW).put(KeyStroke.getKeyStroke("released SHIFT"), "released SHIFT");
+		panel.getInputMap(Defines.IFW).put(KeyStroke.getKeyStroke("SPACE"), "SPACE");
+		panel.getInputMap(Defines.IFW).put(KeyStroke.getKeyStroke("released SPACE"), "released SPACE");
 
 
 		for (char i = 'A'; i <= 'Z'; i++){
@@ -60,6 +66,10 @@ public class KeyHandler {
 		panel.getActionMap().put("released ENTER", new KeyRelease("ENTER"));
 		panel.getActionMap().put("ESCAPE", new KeyPress("ESCAPE"));
 		panel.getActionMap().put("released ESCAPE", new KeyRelease("ESCAPE"));
+		panel.getActionMap().put("SHIFT", new KeyPress("SHIFT"));
+		panel.getActionMap().put("released SHIFT", new KeyRelease("SHIFT"));
+		panel.getActionMap().put("SPACE", new KeyPress("SPACE"));
+		panel.getActionMap().put("released SPACE", new KeyRelease("SPACE"));
 	}
 
 	public void handleKeys(JPanel panel){

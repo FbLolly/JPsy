@@ -13,18 +13,15 @@ import utilsPkg.RayPoint;
 
 public class Map {
     protected MapObject map[][];
-    protected boolean existance[][];
 
     public Map(){
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
-        this.existance = new boolean[Defines.mapSizeX][Defines.mapSizeY];
 
         //creates an empty map
 
         for (int i = 0; i < Defines.mapSizeX; i++){
             for (int ii = 0; ii < Defines.mapSizeY; ii++){
                 map[i][ii] = new MapObject(i*Defines.tileSize, ii*Defines.tileSize, Defines.tileSize, Defines.tileSize, true, 1);
-                existance[i][ii] = false;
             }
         }
     }
@@ -50,20 +47,24 @@ public class Map {
         Defines.mapSizeY = height;
 
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
-        this.existance = new boolean[Defines.mapSizeX][Defines.mapSizeY];
 
 
         for (int i = 0; i < height; i++){
             for (int ii = 0; ii < width; ii++){
                 map[ii][i] = new MapObject(ii*Defines.tileSize, i*Defines.tileSize, Defines.tileSize, Defines.tileSize, true, 0);
-                existance[ii][i] = false;
 
                 int next = scan.nextInt();
 
-                if (next != 0){
-                    existance[ii][i] = true;
-                    map[ii][i].type = next;
+                if (next == 0){
+                    next = (int)(Math.random()*(double)Defines.floors)+10;
                 }
+                map[ii][i].type = next;
+                if (next >= Defines.collidable.length){
+                    map[ii][i].setCollidable(false);
+                    continue;
+                }
+
+                map[ii][i].setCollidable(Defines.collidable[next]);
             }
         }
 
@@ -83,7 +84,7 @@ public class Map {
     public void paintComponent(Graphics g, ImageList imageList){
         for (int i = 0; i < Defines.mapSizeX; i++){
             for (int ii = 0; ii < Defines.mapSizeY; ii++){
-                if (!existance[i][ii])
+                if (this.map[i][ii].type < 0)
                     continue;
 
                 map[i][ii].paintComponent(g, imageList);
@@ -101,12 +102,12 @@ public class Map {
     }
 
     public RayPoint getFirstFree(){
-        for (int i = 0; i < Defines.mapSizeX; i++){
-            for (int ii = 0; ii < Defines.mapSizeY; ii++){
-                if (this.existance[i][ii])
+        for (int i = 0; i < Defines.mapSizeY; i++){
+            for (int ii = 0; ii < Defines.mapSizeX; ii++){
+                if (this.map[ii][i].isCollidable())
                     continue;
 
-                return new RayPoint(i*Defines.tileSize, ii*Defines.tileSize);
+                return new RayPoint(ii*Defines.tileSize, i*Defines.tileSize);
             }
         }
 

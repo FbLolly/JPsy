@@ -19,10 +19,7 @@ public class Collider {
             for (int ii = p.y-2; ii < p.y+2; ii++){
                 if (!map.isValidPoint(new Point(i, ii)))
                     continue;
-
-                if (!map.existance[i][ii])
-                    continue;
-
+                    
                 if (!map.map[i][ii].isCollidable())
                     continue;
 

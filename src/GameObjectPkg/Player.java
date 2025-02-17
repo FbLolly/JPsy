@@ -19,10 +19,7 @@ public class Player extends Entity {
         this.map = map;
     }
 
-    public void updatePos(){
-        this.setSpeedX(0);
-        this.setSpeedY(0);
-
+    public void updateWithKeys(){
         if (this.map.get("W") == 1){
             this.setSpeedY(-Defines.defaultSpeed);
             return;
@@ -40,6 +37,27 @@ public class Player extends Entity {
             this.setSpeedX(Defines.defaultSpeed);
             return;
         }
+    }
+
+    public void sprintListen(){
+        if (this.map.get("SPACE") == 1){
+            this.setSpeedX(this.getSpeedX() * 1.5);
+            this.setSpeedY(this.getSpeedY() * 1.5);
+        }else{
+            if (this.getSpeedX() > Defines.defaultSpeed || this.getSpeedX() < -Defines.defaultSpeed)
+                this.setSpeedX(this.getSpeedX()/2);
+            if (this.getSpeedY() > Defines.defaultSpeed || this.getSpeedY() < -Defines.defaultSpeed)
+                this.setSpeedY(this.getSpeedY()/2);
+        }
+    }
+
+    public void updatePos(){
+        this.setSpeedX(0);
+        this.setSpeedY(0);
+
+        this.updateWithKeys();
+
+        this.sprintListen();
     }
 
     @Override

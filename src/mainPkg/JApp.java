@@ -1,6 +1,5 @@
 package mainPkg;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -154,7 +153,7 @@ public class JApp extends JPanel implements Runnable{
 	
 	public void paintComponent(Graphics g) {
 		//paint background
-		g.setColor(Color.black);
+		g.setColor(Defines.bgc);
 		g.fillRect(0, 0, Defines.width, Defines.height);
 		//-
 
@@ -165,9 +164,8 @@ public class JApp extends JPanel implements Runnable{
 
 		cam.translate((Graphics2D) g);
 
-
-		player.paintComponent(g, imageList);
 		map.paintComponent(g, imageList);
+		player.paintComponent(g, imageList);
 		dialogue.paintComponent(g, cam);
 		
 		cam.untranslate((Graphics2D) g);

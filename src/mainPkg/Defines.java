@@ -1,5 +1,6 @@
 package mainPkg;
 
+import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Image;
 import java.util.LinkedList;
@@ -32,6 +33,11 @@ public class Defines {
 	public static int cameraY = 0;
 
 	public static FontMetrics fontMetrics = null;
+
+	public static final Color bgc = new Color(37, 19, 26);
+	public static final int floors = 4;
+
+	public static final boolean[] collidable = {false, true, true, true, true, true, true, true, true};
 
 	public static Image getCurrentAnimationImage(LinkedList<Image> imgs){
 		double frameOutOfOne = (double)Defines.timer / (double)Defines.FPS;

@@ -7,7 +7,7 @@ import mainPkg.Defines;
 import utilsPkg.RayPoint;
 import utilsPkg.RayRectangle;
 
-public class GameObject {
+public abstract class GameObject {
     protected double x, y;
     protected double width, height;
 
