@@ -167,6 +167,8 @@ public class JApp extends JPanel implements Runnable{
 		map.paintComponent(g, imageList);
 		player.paintComponent(g, imageList);
 		dialogue.paintComponent(g, cam);
+
+		map.paintLighting(g, imageList, cam);
 		
 		cam.untranslate((Graphics2D) g);
 	}

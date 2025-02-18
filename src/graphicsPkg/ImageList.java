@@ -35,10 +35,12 @@ public class ImageList {
             try{
                 Image img = ImageIO.read(is);
 
-                imageMap.get(what).add(img.getScaledInstance((int)Defines.tileSize, (int)Defines.tileSize, Image.SCALE_DEFAULT));
-            }catch(Exception e){
                 if (what.equals("0"))
-                    break;
+                    imageMap.get(what).add(img);
+                else
+                    imageMap.get(what).add(img.getScaledInstance((int)Defines.tileSize, (int)Defines.tileSize, Image.SCALE_DEFAULT));
+            }catch(Exception e){
+                break;
             }
 
             idx++;

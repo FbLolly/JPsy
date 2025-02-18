@@ -1,6 +1,7 @@
 package gameManagement;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -10,10 +11,12 @@ import GameObjectPkg.MapObject;
 import GameObjectPkg.Player;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
+import utilsPkg.Camera;
 import utilsPkg.RayPoint;
 
 public class Map {
     public MapObject map[][];
+    private boolean lit;
 
     public Map(){
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
@@ -40,6 +43,8 @@ public class Map {
 
         int width;
         int height;
+
+        this.lit = scan.nextBoolean();
 
         width = scan.nextInt();
         height = scan.nextInt();
@@ -74,8 +79,6 @@ public class Map {
 
             if (!this.isValidPoint(next))
                 break;
-            
-            System.out.println(next);
 
             map[next.x][next.y] = new InteractiveObject(next.x*Defines.tileSize, next.y*Defines.tileSize,
                                                         Defines.tileSize, Defines.tileSize, map[next.x][next.y].isCollidable(),
@@ -106,6 +109,17 @@ public class Map {
         }
     }
 
+    public void paintLighting(Graphics g, ImageList imageList, Camera cam){
+        if (this.lit)
+            return;
+
+        cam.untranslate((Graphics2D) g);
+        
+        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("0")), 0, 0, null);
+
+        cam.translate((Graphics2D) g);
+    }
+
     public boolean isValidPoint(Point p){
         if (p.x < 0 || p.x >= this.map.length)
             return false;
@@ -132,6 +146,9 @@ public class Map {
         return new Point(i*(int)Defines.tileSize, ii*(int)Defines.tileSize);
     }
     public static Point getMapPosFromPoint(double x, double y){
+        x += Defines.tileSize/2;
+        y += Defines.tileSize/2;
+
         return new Point((int)(x/Defines.tileSize), (int)(y/Defines.tileSize));
     }
 }

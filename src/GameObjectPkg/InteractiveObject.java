@@ -9,9 +9,6 @@ public class InteractiveObject extends MapObject {
     }
 
     public void interact(){
-        if (!this.isInteractable())
-            return;
-
         this.type = 0;
     }
 
