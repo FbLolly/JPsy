@@ -11,6 +11,8 @@ import java.io.InputStream;
 
 import javax.swing.JPanel;
 
+import EffectPkg.Eyes;
+import GameObjectPkg.DeathTimer;
 import GameObjectPkg.Player;
 import gameManagement.Dialogue;
 import gameManagement.Map;
@@ -25,13 +27,15 @@ public class JApp extends JPanel implements Runnable{
 	private double nextDrawTime;
 	private double remainingTime;
 
-	private Player player;
+	public Player player;
 	public Map map;
 	private Camera cam;
 	private ImageList imageList;
+	private DeathTimer deathTimer;
+	private Eyes eyes;
 	
 	private Thread thread;
-	private KeyHandler keyHandler;
+	public KeyHandler keyHandler;
 
 	private Dialogue dialogue;
 
@@ -68,6 +72,10 @@ public class JApp extends JPanel implements Runnable{
 		this.cam = new Camera(0, 0);
 		this.map = new Map("standard");
 		this.dialogue = new Dialogue("1");
+
+		this.eyes = new Eyes();
+
+		this.deathTimer = new DeathTimer();
 
 		RayPoint firstFree = this.map.getFirstFree();
 		this.player = new Player(firstFree.x, firstFree.y, Defines.tileSize, Defines.tileSize);
@@ -146,7 +154,10 @@ public class JApp extends JPanel implements Runnable{
 
 		cam.update(player);
 		player.loadInput(this.keyHandler.KeyMap);
-		player.update(this.map);
+		player.update(this);
+
+		this.deathTimer.update(this);
+		eyes.update(player, deathTimer);
 
 		map.update(player);
 	}
@@ -166,11 +177,13 @@ public class JApp extends JPanel implements Runnable{
 
 		map.paintComponent(g, imageList);
 		player.paintComponent(g, imageList);
+		eyes.paintComponent(g, imageList);
 
 		map.paintLighting(g, imageList, cam);
 		dialogue.paintComponent(g, cam);
 		player.paintInventory(g, imageList, cam);
-		
+		deathTimer.paintComponent(g, imageList, cam);
+
 		cam.untranslate((Graphics2D) g);
 	}
 }

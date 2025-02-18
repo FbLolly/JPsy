@@ -20,7 +20,7 @@ public class KeyHandler {
 			KeyMap.put(i + "", 0);
 		}
 
-		for (char i = '1'; i <= '0'; i++){
+		for (char i = '0'; i <= '9'; i++){
 			KeyMap.put(i + "", 0);
 		}
 
@@ -36,7 +36,7 @@ public class KeyHandler {
 			panel.getInputMap(Defines.IFW).put(KeyStroke.getKeyStroke(i + ""), i + "");
 			panel.getInputMap(Defines.IFW).put(KeyStroke.getKeyStroke("released " + i + ""), "released " + i + "");
 		}
-		for (char i = '1'; i <= '0'; i++){
+		for (char i = '0'; i <= '9'; i++){
 			panel.getInputMap(Defines.IFW).put(KeyStroke.getKeyStroke(i + ""), i + "");
 			panel.getInputMap(Defines.IFW).put(KeyStroke.getKeyStroke("released " + i + ""), "released " + i + "");
 		}
@@ -56,7 +56,7 @@ public class KeyHandler {
 			panel.getActionMap().put(i + "", new KeyPress(i + ""));
 			panel.getActionMap().put("released " + i + "", new KeyRelease(i + ""));
 		}
-		for (char i = '1'; i <= '0'; i++){
+		for (char i = '0'; i <= '9'; i++){
 			panel.getActionMap().put(i + "", new KeyPress(i + ""));
 			panel.getActionMap().put("released " + i + "", new KeyRelease(i + ""));
 		}

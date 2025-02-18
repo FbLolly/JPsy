@@ -7,7 +7,10 @@ import java.util.HashMap;
 
 import gameManagement.Map;
 import graphicsPkg.ImageList;
+import itemPkg.Candle;
+import itemPkg.Lighters;
 import mainPkg.Defines;
+import mainPkg.JApp;
 import utilsPkg.Camera;
 
 public class Player extends Entity {
@@ -21,6 +24,13 @@ public class Player extends Entity {
 
         facing = new Point(0, +1);
         inv = new Inventory();
+
+        inv.addToInv(new Candle());
+        inv.addToInv(new Lighters());
+
+        ((Candle) inv.inv[0]).addCandle();
+        ((Candle) inv.inv[0]).addCandle();
+        ((Candle) inv.inv[0]).addCandle();
     }
     
     public void loadInput(HashMap<String, Integer> map){
@@ -101,7 +111,7 @@ public class Player extends Entity {
     }
 
 
-    public void update(Map map){
+    public void update(JApp app){
         //updates player pos (and speed) with input
         if (this.inputMap == null)
             return;
@@ -113,7 +123,8 @@ public class Player extends Entity {
 
         super.update();
 
-        this.updateInteracting(map);
+        this.updateInteracting(app.map);
+        inv.update(app);
     }
 
     public void automaticRound(Rectangle rect){
