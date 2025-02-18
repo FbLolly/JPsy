@@ -16,7 +16,7 @@ import utilsPkg.RayPoint;
 
 public class Map {
     public MapObject map[][];
-    private boolean lit;
+    public boolean lit;
 
     public Map(){
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
@@ -114,8 +114,8 @@ public class Map {
             return;
 
         cam.untranslate((Graphics2D) g);
-        
-        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("0")), 0, 0, null);
+
+        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("0", Defines.width, Defines.height)), 0, 0, null);
 
         cam.translate((Graphics2D) g);
     }

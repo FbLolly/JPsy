@@ -25,6 +25,7 @@ public class Defines {
 	public static final double runningSpeed = 5;
 
 	public static final double tileSize = Defines.width/50;
+	public static final double invTileSize = Defines.width/25;
 
 	public static int mapSizeX = 50;
 	public static int mapSizeY = 50;
@@ -38,6 +39,8 @@ public class Defines {
 	public static final int floors = 4;
 
 	public static final boolean[] collidable = {false, true, true, true, true, true, true, true, true};
+
+	public static final int inventorySize = 3;
 
 	public static Image getCurrentAnimationImage(LinkedList<Image> imgs){
 		double frameOutOfOne = (double)Defines.timer / (double)Defines.FPS;

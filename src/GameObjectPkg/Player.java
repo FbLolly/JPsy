@@ -8,16 +8,19 @@ import java.util.HashMap;
 import gameManagement.Map;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
+import utilsPkg.Camera;
 
 public class Player extends Entity {
     public HashMap<String, Integer> inputMap;
     private double prevx, prevy;
     private Point facing;
+    private Inventory inv;
     
     public Player(double x, double y, double width, double height) {
         super(x, y, width, height);
 
         facing = new Point(0, +1);
+        inv = new Inventory();
     }
     
     public void loadInput(HashMap<String, Integer> map){
@@ -121,6 +124,10 @@ public class Player extends Entity {
     }
 
     public void paintComponent(Graphics g, ImageList imageList){
-        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("player")), (int)this.x, (int)this.y, null);
+        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("player", (int)Defines.tileSize, (int)Defines.tileSize)), (int)this.x, (int)this.y, null);
+    }
+
+    public void paintInventory(Graphics g, ImageList imageList, Camera cam){
+        inv.paintComponent(g, imageList, cam);
     }
 }

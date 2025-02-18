@@ -26,7 +26,7 @@ public class JApp extends JPanel implements Runnable{
 	private double remainingTime;
 
 	private Player player;
-	private Map map;
+	public Map map;
 	private Camera cam;
 	private ImageList imageList;
 	
@@ -166,9 +166,10 @@ public class JApp extends JPanel implements Runnable{
 
 		map.paintComponent(g, imageList);
 		player.paintComponent(g, imageList);
-		dialogue.paintComponent(g, cam);
 
 		map.paintLighting(g, imageList, cam);
+		dialogue.paintComponent(g, cam);
+		player.paintInventory(g, imageList, cam);
 		
 		cam.untranslate((Graphics2D) g);
 	}

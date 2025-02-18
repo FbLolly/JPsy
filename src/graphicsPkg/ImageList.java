@@ -7,8 +7,6 @@ import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
-import mainPkg.Defines;
-
 public class ImageList {
     private HashMap<String, LinkedList<Image>> imageMap;
 
@@ -16,7 +14,7 @@ public class ImageList {
         imageMap = new HashMap<>();
     }
 
-    public LinkedList<Image> getImages(String what){
+    public LinkedList<Image> getImages(String what, int width, int height){
         if (imageMap.containsKey(what))
             return imageMap.get(what);
         
@@ -35,10 +33,7 @@ public class ImageList {
             try{
                 Image img = ImageIO.read(is);
 
-                if (what.equals("0"))
-                    imageMap.get(what).add(img);
-                else
-                    imageMap.get(what).add(img.getScaledInstance((int)Defines.tileSize, (int)Defines.tileSize, Image.SCALE_DEFAULT));
+                imageMap.get(what).add(img.getScaledInstance(width, height, Image.SCALE_DEFAULT));
             }catch(Exception e){
                 break;
             }

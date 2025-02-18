@@ -29,7 +29,7 @@ public class MapObject extends GameObject {
         if (this.outsideCamera())
             return;
         
-        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(""+this.type)), (int)this.x, (int)this.y, null);
+        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(""+this.type, (int)Defines.tileSize, (int)Defines.tileSize)), (int)this.x, (int)this.y, null);
     }
 
     public boolean isInteractable(){

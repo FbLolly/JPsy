@@ -32,10 +32,6 @@ public abstract class GameObject {
     }
 
     public void paintComponent(Graphics g, ImageList imageList){
-        if (this.outsideCamera())
-            return;
-        
-        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("0")), (int)this.x, (int)this.y, null);
     }
 
     public RayPoint getPoint(){
