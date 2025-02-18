@@ -146,7 +146,7 @@ public class JApp extends JPanel implements Runnable{
 
 		cam.update(player);
 		player.loadInput(this.keyHandler.KeyMap);
-		player.update();
+		player.update(this.map);
 
 		map.update(player);
 	}

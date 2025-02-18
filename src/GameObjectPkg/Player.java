@@ -1,46 +1,59 @@
 package GameObjectPkg;
 
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.HashMap;
 
+import gameManagement.Map;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
 
 public class Player extends Entity {
-    public HashMap<String, Integer> map;
+    public HashMap<String, Integer> inputMap;
     private double prevx, prevy;
+    private Point facing;
     
     public Player(double x, double y, double width, double height) {
         super(x, y, width, height);
+
+        facing = new Point(0, +1);
     }
     
     public void loadInput(HashMap<String, Integer> map){
-        this.map = map;
+        this.inputMap = map;
     }
 
     public void updateWithKeys(){
-        if (this.map.get("W") == 1){
+        if (this.inputMap.get("W") == 1){
             this.setSpeedY(-Defines.defaultSpeed);
+            facing.x = 0; facing.y = -1;
+
             return;
         }
-        if (this.map.get("S") == 1){
+        if (this.inputMap.get("S") == 1){
             this.setSpeedY(Defines.defaultSpeed);
+            facing.x = 0; facing.y = +1;
+
             return;
         }
 
-        if (this.map.get("A") == 1){
+        if (this.inputMap.get("A") == 1){
             this.setSpeedX(-Defines.defaultSpeed);
+            facing.x = -1; facing.y = 0;
+
             return;
         }
-        if (this.map.get("D") == 1){
+        if (this.inputMap.get("D") == 1){
             this.setSpeedX(Defines.defaultSpeed);
+            facing.x = +1; facing.y = 0;
+
             return;
         }
     }
 
     public void sprintListen(){
-        if (this.map.get("SPACE") == 1){
+        if (this.inputMap.get("SPACE") == 1){
             this.setSpeedX(this.getSpeedX() * 1.5);
             this.setSpeedY(this.getSpeedY() * 1.5);
         }else{
@@ -51,19 +64,43 @@ public class Player extends Entity {
         }
     }
 
+    public Point getInteractingPos(){
+        Point playerPos = Map.getMapPosFromPoint(this.x, this.y);
+
+        return new Point(
+            playerPos.x + this.facing.x,
+            playerPos.y + this.facing.y
+        );
+    }
+
+    public void updateInteracting(Map map){
+        Point interactingPos = getInteractingPos();
+
+        if (!map.isValidPoint(interactingPos))
+            return;
+
+        if (this.inputMap.get("E") != 1)
+            return;
+
+        if (!map.map[interactingPos.x][interactingPos.y].isInteractable())
+            return;
+
+        InteractiveObject obj = (InteractiveObject) map.map[interactingPos.x][interactingPos.y];
+        obj.interact();
+    }
+
     public void updatePos(){
         this.setSpeedX(0);
         this.setSpeedY(0);
 
         this.updateWithKeys();
-
         this.sprintListen();
     }
 
-    @Override
-    public void update(){
+
+    public void update(Map map){
         //updates player pos (and speed) with input
-        if (this.map == null)
+        if (this.inputMap == null)
             return;
 
         prevx = this.getX();
@@ -72,6 +109,8 @@ public class Player extends Entity {
         updatePos();
 
         super.update();
+
+        this.updateInteracting(map);
     }
 
     public void automaticRound(Rectangle rect){

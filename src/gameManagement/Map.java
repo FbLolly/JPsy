@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.io.InputStream;
 import java.util.Scanner;
 
+import GameObjectPkg.InteractiveObject;
 import GameObjectPkg.MapObject;
 import GameObjectPkg.Player;
 import graphicsPkg.ImageList;
@@ -12,7 +13,7 @@ import mainPkg.Defines;
 import utilsPkg.RayPoint;
 
 public class Map {
-    protected MapObject map[][];
+    public MapObject map[][];
 
     public Map(){
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
@@ -66,6 +67,19 @@ public class Map {
 
                 map[ii][i].setCollidable(Defines.collidable[next]);
             }
+        }
+
+        while (scan.hasNextInt()){
+            Point next = new Point(scan.nextInt(), scan.nextInt());
+
+            if (!this.isValidPoint(next))
+                break;
+            
+            System.out.println(next);
+
+            map[next.x][next.y] = new InteractiveObject(next.x*Defines.tileSize, next.y*Defines.tileSize,
+                                                        Defines.tileSize, Defines.tileSize, map[next.x][next.y].isCollidable(),
+                                                        map[next.x][next.y].type);
         }
 
         scan.close();
