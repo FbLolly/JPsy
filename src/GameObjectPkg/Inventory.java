@@ -12,8 +12,8 @@ import mainPkg.JApp;
 import utilsPkg.Camera;
 
 public class Inventory {
-    protected Item[] inv;
-    protected int selected;
+    public Item[] inv;
+    public int selected;
 
     public Inventory(){
         inv = new Item[Defines.inventorySize];
@@ -22,7 +22,7 @@ public class Inventory {
     }
 
     public void update(JApp app){
-        for (int i = 0; i < Defines.inventorySize; i++){    
+        for (int i = 0; i < Defines.inventorySize; i++){
             if (app.player.inputMap.get((i+1) + "") == 1)
                 selected = i;
 

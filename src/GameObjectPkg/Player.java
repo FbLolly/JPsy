@@ -7,8 +7,6 @@ import java.util.HashMap;
 
 import gameManagement.Map;
 import graphicsPkg.ImageList;
-import itemPkg.Candle;
-import itemPkg.Lighters;
 import mainPkg.Defines;
 import mainPkg.JApp;
 import utilsPkg.Camera;
@@ -17,20 +15,13 @@ public class Player extends Entity {
     public HashMap<String, Integer> inputMap;
     private double prevx, prevy;
     private Point facing;
-    private Inventory inv;
+    public Inventory inv;
     
     public Player(double x, double y, double width, double height) {
         super(x, y, width, height);
 
         facing = new Point(0, +1);
         inv = new Inventory();
-
-        inv.addToInv(new Candle());
-        inv.addToInv(new Lighters());
-
-        ((Candle) inv.inv[0]).addCandle();
-        ((Candle) inv.inv[0]).addCandle();
-        ((Candle) inv.inv[0]).addCandle();
     }
     
     public void loadInput(HashMap<String, Integer> map){
@@ -99,7 +90,7 @@ public class Player extends Entity {
             return;
 
         InteractiveObject obj = (InteractiveObject) map.map[interactingPos.x][interactingPos.y];
-        obj.interact();
+        obj.interact(this);
     }
 
     public void updatePos(){
