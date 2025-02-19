@@ -8,7 +8,7 @@ import java.util.HashMap;
 import gameManagement.Map;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
-import mainPkg.JApp;
+import mainPkg.Game;
 import utilsPkg.Camera;
 
 public class Player extends Entity {
@@ -85,6 +85,7 @@ public class Player extends Entity {
 
         if (this.inputMap.get("E") != 1)
             return;
+        this.inputMap.replace("E", 0);
 
         if (!map.map[interactingPos.x][interactingPos.y].isInteractable())
             return;
@@ -102,7 +103,7 @@ public class Player extends Entity {
     }
 
 
-    public void update(JApp app){
+    public void update(Game game){
         //updates player pos (and speed) with input
         if (this.inputMap == null)
             return;
@@ -114,8 +115,8 @@ public class Player extends Entity {
 
         super.update();
 
-        this.updateInteracting(app.map);
-        inv.update(app);
+        this.updateInteracting(game.map);
+        inv.update(game);
     }
 
     public void automaticRound(Rectangle rect){

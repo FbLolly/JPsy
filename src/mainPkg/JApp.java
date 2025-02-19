@@ -4,49 +4,23 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.swing.JPanel;
 
-import EffectPkg.Eyes;
-import GameObjectPkg.DeathTimer;
-import GameObjectPkg.Player;
-import gameManagement.Dialogue;
-import gameManagement.Map;
-import graphicsPkg.ImageList;
-import utilsPkg.Camera;
-import utilsPkg.KeyHandler;
-import utilsPkg.Mouse;
-import utilsPkg.RayPoint;
-
 public class JApp extends JPanel implements Runnable{
 	private double drawInterval;
 	private double nextDrawTime;
 	private double remainingTime;
-
-	public Player player;
-	public Map map;
-	private Camera cam;
-	private ImageList imageList;
-	private DeathTimer deathTimer;
-	private Eyes eyes;
 	
 	private Thread thread;
-	public KeyHandler keyHandler;
-
-	private Dialogue dialogue;
-
-	private Mouse mouse;
-
 	private boolean isWindows;
 
-	public JApp() {
-		this.keyHandler = new KeyHandler();
-		this.mouse = new Mouse();
+	private Game game;
 
+	public JApp() {
 		this.isWindows();
 		
 		try {
@@ -60,25 +34,13 @@ public class JApp extends JPanel implements Runnable{
 
 		this.setDoubleBuffered(true);
 		this.setPreferredSize(new Dimension(Defines.width, Defines.height));
-		this.addMouseListener(mouse);
 		this.setFocusable(true);
 
 		this.setSize(new Dimension(Defines.width, Defines.height));
 		this.setBounds(0, 0, Defines.width, Defines.height);
 		this.setVisible(true);
 
-		this.imageList = new ImageList();
-
-		this.cam = new Camera(0, 0);
-		this.map = new Map("standard");
-		this.dialogue = new Dialogue("1");
-
-		this.eyes = new Eyes();
-
-		this.deathTimer = new DeathTimer();
-
-		RayPoint firstFree = this.map.getFirstFree();
-		this.player = new Player(firstFree.x, firstFree.y, Defines.tileSize, Defines.tileSize);
+		game = new Game(this);
 		
 		this.startGame();
 	}
@@ -141,49 +103,12 @@ public class JApp extends JPanel implements Runnable{
     		Defines.timer += 1;
     	}
 	}
-
-	private void updateIO(){
-		this.keyHandler.handleKeys(this);
-		this.mouse.updateMousePos(this);
-	}
 	
 	private void update() {
-		this.updateIO();
-
-		dialogue.update(this.keyHandler.KeyMap);
-
-		cam.update(player);
-		player.loadInput(this.keyHandler.KeyMap);
-		player.update(this);
-
-		this.deathTimer.update(this);
-		eyes.update(player, deathTimer);
-
-		map.update(player);
+		this.game.update();
 	}
 	
 	public void paintComponent(Graphics g) {
-		//paint background
-		g.setColor(Defines.bgc);
-		g.fillRect(0, 0, Defines.width, Defines.height);
-		//-
-
-		if (Defines.fontMetrics == null){
-			Defines.fontMetrics = g.getFontMetrics();
-			dialogue.updateShowing();
-		}
-
-		cam.translate((Graphics2D) g);
-
-		map.paintComponent(g, imageList);
-		player.paintComponent(g, imageList);
-		eyes.paintComponent(g, imageList);
-
-		map.paintLighting(g, imageList, cam);
-		dialogue.paintComponent(g, cam);
-		player.paintInventory(g, imageList, cam);
-		deathTimer.paintComponent(g, imageList, cam);
-
-		cam.untranslate((Graphics2D) g);
+		this.game.paintComponent(g);
 	}
 }

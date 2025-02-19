@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 import graphicsPkg.ImageList;
-import mainPkg.JApp;
+import mainPkg.Game;
 
 public class Lighters extends Item {
     private int durability;
@@ -16,11 +16,11 @@ public class Lighters extends Item {
         this.ID = "Item@Lighters";
     }
 
-    public void update(JApp app){
+    public void update(Game game){
 
     }
 
-    public int activate(JApp app){
+    public int activate(Game game){
         this.durability--;
 
         if (this.durability <= 0)

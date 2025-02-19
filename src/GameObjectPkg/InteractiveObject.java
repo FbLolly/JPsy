@@ -40,12 +40,11 @@ public class InteractiveObject extends MapObject {
                 player.inv.addToInv(new Lighters());
             break;
             default:
-                break;
+            break;
         }
 
         this.setCollidable(false);
         this.setInteractable(false);
-
         this.type = this.drawType;
     }
 

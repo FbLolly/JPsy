@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import gameManagement.Map;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
-import mainPkg.JApp;
 import utilsPkg.Camera;
 
 public class DeathTimer {
@@ -17,9 +17,9 @@ public class DeathTimer {
         this.timer = 30;
     }
 
-    public void update(JApp app){
+    public void update(Map map){
         this.lit = false;
-        if (app.map.lit){
+        if (map.lit){
             this.lit = true;
             return;
         }

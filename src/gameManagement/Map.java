@@ -17,6 +17,7 @@ import utilsPkg.RayPoint;
 public class Map {
     public MapObject map[][];
     public boolean lit;
+    private Point spawn;
 
     public Map(){
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
@@ -30,16 +31,10 @@ public class Map {
         }
     }
     public Map(String fileName){
-        Scanner scan;
-        
-        try{
-            InputStream is = this.getClass().getResourceAsStream("maps/"+fileName+".txt");
-
-            scan = new Scanner(is);
-        }catch(Exception e){
-            e.printStackTrace();
-            scan = new Scanner(System.in);
-        }
+        InputStream is = this.getClass().getResourceAsStream("maps/"+fileName+".txt");
+        if (is == null)
+            return;
+        Scanner scan = new Scanner(is);
 
         int width;
         int height;
@@ -61,8 +56,13 @@ public class Map {
 
                 int next = scan.nextInt();
 
-                if (next == 0){
-                    next = (int)(Math.random()*(double)Defines.floors)+10;
+                switch (next){
+                    case -1:
+                        this.spawn = new Point(ii, i);
+                    //the brake is not there for a reason
+                    case 0:
+                        next = (int)(Math.random()*(double)Defines.floors)+10;
+                    break;
                 }
                 map[ii][i].type = next;
                 if (next >= Defines.collidable.length){
@@ -129,17 +129,8 @@ public class Map {
         return true;
     }
 
-    public RayPoint getFirstFree(){
-        for (int i = 0; i < Defines.mapSizeY; i++){
-            for (int ii = 0; ii < Defines.mapSizeX; ii++){
-                if (this.map[ii][i].isCollidable())
-                    continue;
-
-                return new RayPoint(ii*Defines.tileSize, i*Defines.tileSize);
-            }
-        }
-
-        return null;
+    public RayPoint getSpawn(){
+        return new RayPoint(this.spawn.x * Defines.tileSize, this.spawn.y * Defines.tileSize);
     }
 
     public static Point getPointFromMapPos(int i, int ii){

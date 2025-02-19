@@ -1,7 +1,7 @@
 package itemPkg;
 
 import mainPkg.Defines;
-import mainPkg.JApp;
+import mainPkg.Game;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -33,11 +33,11 @@ public class Candle extends Item {
         this.lit = true;
     }
     
-    public void update(JApp app){
+    public void update(Game game){
         if (!this.lit)
             return;
         
-        app.map.lit = true;
+        game.map.lit = true;
     }
 
     public void paintComponent(Graphics g, Point pos, ImageList imageList){

@@ -8,7 +8,7 @@ import graphicsPkg.ImageList;
 import itemPkg.Candle;
 import itemPkg.Item;
 import mainPkg.Defines;
-import mainPkg.JApp;
+import mainPkg.Game;
 import utilsPkg.Camera;
 
 public class Inventory {
@@ -21,36 +21,39 @@ public class Inventory {
         selected = 0;
     }
 
-    public void update(JApp app){
+    public void update(Game game){
         for (int i = 0; i < Defines.inventorySize; i++){
-            if (app.player.inputMap.get((i+1) + "") == 1)
+            if (game.player.inputMap.get((i+1) + "") == 1)
                 selected = i;
 
             if (this.inv[i] == null)
                 continue;
             
-            this.inv[i].update(app);
+            this.inv[i].update(game);
         }
 
         if (this.inv[selected] == null)
             return;
 
-        if (app.player.inputMap.get("F") != 1)
+        if (game.keyHandler.KeyMap.get("F") != 1)
             return;
-        app.player.inputMap.replace("F", 0);
+        game.keyHandler.KeyMap.replace("F", 0);
 
-        int ret = this.inv[selected].activate(app);
+        int ret = this.inv[selected].activate(game);
+        System.out.println(ret);
         switch (ret) {
             case 1:
             for (int i = 0; i < Defines.inventorySize; i++){
+                if (this.inv[i] == null)
+                    continue;
                 if (!this.inv[i].ID.equals("Item@Candle"))
-                    return;
+                    continue;
                 ((Candle) this.inv[i]).light();
             }
             break;
             case -1:
-            this.inv[selected] = null;
-            System.gc();
+                this.inv[selected] = null;
+                System.gc();
             break;
             default:
             break;

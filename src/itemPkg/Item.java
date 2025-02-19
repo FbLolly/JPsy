@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 import graphicsPkg.ImageList;
-import mainPkg.JApp;
+import mainPkg.Game;
 
 public abstract class Item {
     protected int type;
@@ -16,11 +16,11 @@ public abstract class Item {
         this.ID = "Item@Default";
     }
 
-    public void update(JApp app){
+    public void update(Game game){
 
     }
 
-    public int activate(JApp app){
+    public int activate(Game game){
         return 0;
     }
 
