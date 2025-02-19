@@ -87,6 +87,8 @@ public class Game {
 		this.player.paintInventory(g, this.imageList, this.cam);
 		this.deathTimer.paintComponent(g, this.imageList, this.cam);
 
+    this.eyes.paintStatic(g, imageList, cam);
+
 		this.cam.untranslate((Graphics2D) g);
     }
 }

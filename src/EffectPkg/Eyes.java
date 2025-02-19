@@ -1,6 +1,7 @@
 package EffectPkg;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -8,16 +9,20 @@ import GameObjectPkg.DeathTimer;
 import GameObjectPkg.Player;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
+import utilsPkg.Camera;
 
 public class Eyes {
     private Point playerPos;
     ArrayList<Point> randoms;
     private boolean start;
+    private boolean noise;
+
     private int counter;
 
     public Eyes(){
         randoms = new ArrayList<>();
         start = false;
+        noise = false;
         counter = 0;
 
         randoms.add(new Point(((int)(Math.random()*(Defines.width/2))-Defines.width/4),
@@ -62,6 +67,11 @@ public class Eyes {
             }
         }
 
+        if (dt.timer > 15){
+            noise = false;
+            return;
+        }
+        this.noise = true;
     }
 
     public void paintComponent(Graphics g, ImageList imageList){
@@ -74,5 +84,16 @@ public class Eyes {
             g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("eyes", (int)Defines.tileSize*2, (int)Defines.tileSize*2)),
                         pos.x, pos.y, null);
         }
+    }
+
+    public void paintStatic(Graphics g, ImageList imageList, Camera cam){
+        cam.untranslate((Graphics2D) g);
+
+        if (!this.noise)
+        return;
+
+        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("noise", (int)Defines.width, (int)Defines.height)), 0, 0, null);
+
+        cam.translate((Graphics2D) g);
     }
 }
