@@ -10,6 +10,7 @@ import graphicsPkg.ImageList;
 import mainPkg.Defines;
 import mainPkg.Game;
 import utilsPkg.Camera;
+import utilsPkg.RayPoint;
 
 public class Player extends Entity {
     public HashMap<String, Integer> inputMap;
@@ -117,6 +118,14 @@ public class Player extends Entity {
 
         this.updateInteracting(game.map);
         inv.update(game);
+
+        if (!game.map.isValidPoint(Map.getMapPosFromPoint(x, y))){
+            game.map = new Map(""+game.map.nextRoom);
+            
+            RayPoint pos = game.map.getSpawn();
+            this.x = pos.x;
+            this.y = pos.y;
+        }
     }
 
     public void automaticRound(Rectangle rect){

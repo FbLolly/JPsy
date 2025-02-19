@@ -18,6 +18,7 @@ public class Map {
     public MapObject map[][];
     public boolean lit;
     private Point spawn;
+    public int nextRoom;
 
     public Map(){
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
@@ -38,6 +39,7 @@ public class Map {
 
         int width;
         int height;
+        this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
 
         this.lit = scan.nextBoolean();
 
@@ -47,8 +49,9 @@ public class Map {
         Defines.mapSizeX = width;
         Defines.mapSizeY = height;
 
-        this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
+        nextRoom = scan.nextInt();
 
+        this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
 
         for (int i = 0; i < height; i++){
             for (int ii = 0; ii < width; ii++){
