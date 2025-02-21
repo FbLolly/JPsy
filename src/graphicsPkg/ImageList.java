@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
-import mainPkg.Defines;
-
 public class ImageList {
     private HashMap<String, LinkedList<Image>> imageMap;
 
