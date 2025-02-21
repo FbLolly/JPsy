@@ -12,7 +12,10 @@ public class Defines {
 
 	public static int FPS = 60;
 	public static int waiting = FPS;
+
 	public static int timer = 0;
+	public static int animationTimer = 0;
+	public static final int maxSlow = 5;
 
 	public static final float fontSize = 20f;
 
@@ -50,8 +53,8 @@ public class Defines {
 		if (imgs == null) return null;
 		if (imgs.size() == 0) return null;
 
-		double frameOutOfOne = (double)Defines.timer / (double)Defines.FPS;
-		double changeFrameOutOfOne = ((double)Defines.FPS/(double)imgs.size())/(double)Defines.FPS;
+		double frameOutOfOne = (double)Defines.animationTimer / (double)(Defines.FPS * Defines.maxSlow);
+		double changeFrameOutOfOne = ((double)(Defines.FPS * Defines.maxSlow)/(double)imgs.size())/(double)(Defines.FPS * Defines.maxSlow);
 
 		int idx = (int)(frameOutOfOne/changeFrameOutOfOne);
 		if (idx >= imgs.size())

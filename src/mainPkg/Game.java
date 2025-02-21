@@ -3,7 +3,6 @@ package mainPkg;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import EffectPkg.Eyes;
 import GameObjectPkg.DeathTimer;
 import GameObjectPkg.Player;
 import gameManagement.Dialogue;
@@ -20,7 +19,6 @@ public class Game {
     private Camera cam;
     private ImageList imageList;
     private DeathTimer deathTimer;
-    private Eyes eyes;
     private Dialogue dialogue;
 
     public KeyHandler keyHandler;
@@ -36,7 +34,6 @@ public class Game {
         this.cam = new Camera(0, 0);
         this.imageList = new ImageList();
         this.deathTimer = new DeathTimer();
-        this.eyes = new Eyes();
         this.dialogue = new Dialogue("1");
 
         this.keyHandler = new KeyHandler();
@@ -46,23 +43,22 @@ public class Game {
     }
 
     public void updateIO(){
-		this.keyHandler.handleKeys(this.app);
-		this.mouse.updateMousePos(this.app);
+      this.keyHandler.handleKeys(this.app);
+      this.mouse.updateMousePos(this.app);
     }
 
     public void update(){
-        this.updateIO();
+      this.updateIO();
 
-		this.dialogue.update(this.keyHandler.KeyMap);
+      this.dialogue.update(this.keyHandler.KeyMap);
 
-		this.cam.update(this.player);
-		this.player.loadInput(this.keyHandler.KeyMap);
-		this.player.update(this);
+      this.cam.update(this.player);
+      this.player.loadInput(this.keyHandler.KeyMap);
+      this.player.update(this);
 
-		this.deathTimer.update(this.map);
-		this.eyes.update(this.player, this.deathTimer);
+      this.deathTimer.update(this.map, this.player);
 
-		this.map.update(this.player);
+      this.map.update(this.player);
     }
 
     public void paintComponent(Graphics g){
@@ -80,14 +76,11 @@ public class Game {
 
 		this.map.paintComponent(g, this.imageList);
 		this.player.paintComponent(g, this.imageList);
-		this.eyes.paintComponent(g, this.imageList);
 
 		this.map.paintLighting(g, this.imageList, this.cam);
 		this.dialogue.paintComponent(g, cam);
 		this.player.paintInventory(g, this.imageList, this.cam);
 		this.deathTimer.paintComponent(g, this.imageList, this.cam);
-
-    this.eyes.paintStatic(g, imageList, cam);
 
 		this.cam.untranslate((Graphics2D) g);
     }

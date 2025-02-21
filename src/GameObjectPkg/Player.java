@@ -17,12 +17,18 @@ public class Player extends Entity {
     private double prevx, prevy;
     private Point facing;
     public Inventory inv;
+
+    private String gFacing = "";
+    private String movement = "";
     
     public Player(double x, double y, double width, double height) {
         super(x, y, width, height);
 
         facing = new Point(0, +1);
         inv = new Inventory();
+
+        movement = "idle";
+        gFacing = "down";
     }
     
     public void loadInput(HashMap<String, Integer> map){
@@ -30,15 +36,21 @@ public class Player extends Entity {
     }
 
     public void updateWithKeys(){
+        this.movement = "idle";
+
         if (this.inputMap.get("W") == 1){
             this.setSpeedY(-Defines.defaultSpeed);
             facing.x = 0; facing.y = -1;
+            this.movement = "walking";
+            this.gFacing = "up";
 
             return;
         }
         if (this.inputMap.get("S") == 1){
             this.setSpeedY(Defines.defaultSpeed);
             facing.x = 0; facing.y = +1;
+            this.movement = "walking";
+            this.gFacing = "down";
 
             return;
         }
@@ -46,12 +58,16 @@ public class Player extends Entity {
         if (this.inputMap.get("A") == 1){
             this.setSpeedX(-Defines.defaultSpeed);
             facing.x = -1; facing.y = 0;
+            this.movement = "walking";
+            this.gFacing = "left";
 
             return;
         }
         if (this.inputMap.get("D") == 1){
             this.setSpeedX(Defines.defaultSpeed);
             facing.x = +1; facing.y = 0;
+            this.movement = "walking";
+            this.gFacing = "right";
 
             return;
         }
@@ -61,6 +77,8 @@ public class Player extends Entity {
         if (this.inputMap.get("SPACE") == 1){
             this.setSpeedX(this.getSpeedX() * 1.5);
             this.setSpeedY(this.getSpeedY() * 1.5);
+
+            this.movement = "running";
         }else{
             if (this.getSpeedX() > Defines.defaultSpeed || this.getSpeedX() < -Defines.defaultSpeed)
                 this.setSpeedX(this.getSpeedX()/2);
@@ -136,7 +154,7 @@ public class Player extends Entity {
     }
 
     public void paintComponent(Graphics g, ImageList imageList){
-        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("player", (int)Defines.tileSize, (int)Defines.tileSize)), (int)this.x, (int)this.y, null);
+        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(this.movement+"_"+this.gFacing, (int)Defines.tileSize*2, (int)Defines.tileSize*2)), (int)this.x, (int)this.y, null);
     }
 
     public void paintInventory(Graphics g, ImageList imageList, Camera cam){

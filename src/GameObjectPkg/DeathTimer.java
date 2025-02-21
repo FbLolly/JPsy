@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import EffectPkg.Eyes;
 import gameManagement.Map;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
@@ -12,12 +13,13 @@ import utilsPkg.Camera;
 public class DeathTimer {
     public int timer;
     public boolean lit;
+    private Eyes eyes;
 
     public DeathTimer(){
         this.timer = 30;
     }
 
-    public void update(Map map){
+    public void update(Map map, Player player){
         this.lit = false;
         if (map.lit){
             this.lit = true;
@@ -30,16 +32,30 @@ public class DeathTimer {
         if (this.timer <= 0){
             this.lit = true;
         }
+
+        if (this.timer < 20 && this.eyes == null){
+            this.eyes = new Eyes();
+        }
+
+        if (this.eyes == null)
+            return;
+        this.eyes.update(player, this);
     }
 
     public void paintComponent(Graphics g, ImageList imageList, Camera cam){
         if (this.lit)
             return;
+
+        if (this.eyes != null)
+            this.eyes.paintComponent(g, imageList);
         
         cam.untranslate((Graphics2D) g);
 
         g.setColor(Color.red);
         g.drawString(""+this.timer, Defines.width/2 + (int)Defines.tileSize - (int)(Defines.fontMetrics.stringWidth(""+this.timer))/2, (int)(Defines.height/3));
+        
+        if (this.eyes != null)
+            this.eyes.paintStatic(g, imageList, cam);
 
         cam.translate((Graphics2D) g);
     }

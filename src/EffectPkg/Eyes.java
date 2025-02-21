@@ -43,7 +43,7 @@ public class Eyes {
         }
         this.start = true;
 
-        if (Defines.timer == Defines.FPS){
+        if (Defines.animationTimer == Defines.FPS*Defines.maxSlow){
             int size = this.randoms.size();
             this.randoms = new ArrayList<>();
 
@@ -67,7 +67,7 @@ public class Eyes {
             }
         }
 
-        if (dt.timer > 15){
+        if (dt.timer > 15 || dt.lit){
             noise = false;
             return;
         }
@@ -87,13 +87,11 @@ public class Eyes {
     }
 
     public void paintStatic(Graphics g, ImageList imageList, Camera cam){
-        cam.untranslate((Graphics2D) g);
-
         if (!this.noise)
-        return;
-
+            return;
+        if (!this.start)
+            return;
+        
         g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("noise", (int)Defines.width, (int)Defines.height)), 0, 0, null);
-
-        cam.translate((Graphics2D) g);
     }
 }

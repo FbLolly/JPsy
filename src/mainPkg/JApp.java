@@ -98,9 +98,14 @@ public class JApp extends JPanel implements Runnable{
 				Toolkit.getDefaultToolkit().sync();
 			}
 			
-			if (Defines.timer > 60)
+			if (Defines.timer > Defines.FPS)
 				Defines.timer = 0;
     		Defines.timer += 1;
+
+			if (Defines.animationTimer > Defines.FPS*Defines.maxSlow){
+				Defines.animationTimer = 0;
+			}
+			Defines.animationTimer += 1;
     	}
 	}
 	
