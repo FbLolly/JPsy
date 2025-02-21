@@ -1,5 +1,6 @@
 package GameObjectPkg;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -154,7 +155,8 @@ public class Player extends Entity {
     }
 
     public void paintComponent(Graphics g, ImageList imageList){
-        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(this.movement+"_"+this.gFacing, (int)Defines.tileSize*2, (int)Defines.tileSize*2)), (int)this.x, (int)this.y, null);
+        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(this.movement+"_"+this.gFacing, (int)Defines.tileSize*2, (int)Defines.tileSize*2)),
+                    (int)(this.x - Defines.tileSize/2), (int)(this.y - Defines.tileSize), null);
     }
 
     public void paintInventory(Graphics g, ImageList imageList, Camera cam){
