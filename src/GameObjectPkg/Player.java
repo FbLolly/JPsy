@@ -19,8 +19,8 @@ public class Player extends Entity {
     private Point facing;
     public Inventory inv;
 
-    private String gFacing = "";
-    private String movement = "";
+    public String gFacing = "";
+    public String movement = "";
     
     public Player(double x, double y, double width, double height) {
         super(x, y, width, height);
@@ -79,13 +79,16 @@ public class Player extends Entity {
             this.setSpeedX(this.getSpeedX() * 1.5);
             this.setSpeedY(this.getSpeedY() * 1.5);
 
-            this.movement = "running";
-        }else{
-            if (this.getSpeedX() > Defines.defaultSpeed || this.getSpeedX() < -Defines.defaultSpeed)
-                this.setSpeedX(this.getSpeedX()/2);
-            if (this.getSpeedY() > Defines.defaultSpeed || this.getSpeedY() < -Defines.defaultSpeed)
-                this.setSpeedY(this.getSpeedY()/2);
+            if (this.movement.equals("walking"))
+                this.movement = "running";
+
+            return;
         }
+
+        if (this.getSpeedX() > Defines.defaultSpeed || this.getSpeedX() < -Defines.defaultSpeed)
+            this.setSpeedX(this.getSpeedX()/2);
+        if (this.getSpeedY() > Defines.defaultSpeed || this.getSpeedY() < -Defines.defaultSpeed)
+            this.setSpeedY(this.getSpeedY()/2);
     }
 
     public Point getInteractingPos(){
