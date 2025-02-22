@@ -15,7 +15,7 @@ import utilsPkg.RayPoint;
 public class Player extends Entity {
     public HashMap<String, Integer> inputMap;
     private double prevx, prevy;
-    private Point facing;
+    public Point facing;
     public Inventory inv;
 
     public String gFacing = "";

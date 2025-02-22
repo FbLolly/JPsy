@@ -8,6 +8,7 @@ import GameObjectPkg.Player;
 import gameManagement.Dialogue;
 import gameManagement.Map;
 import graphicsPkg.ImageList;
+import particlesPkg.Particles;
 import utilsPkg.Camera;
 import utilsPkg.KeyHandler;
 import utilsPkg.Mouse;
@@ -24,6 +25,8 @@ public class Game {
     public KeyHandler keyHandler;
     private Mouse mouse;
 
+    Particles particles;
+
     private JApp app; //only used for input, nothing else
 
     public Game(JApp app){
@@ -38,6 +41,8 @@ public class Game {
 
         this.keyHandler = new KeyHandler();
         this.mouse = new Mouse();
+
+        this.particles = new Particles();
 
         this.app = app;
     }
@@ -57,6 +62,7 @@ public class Game {
       this.player.update(this);
 
       this.deathTimer.update(this.map, this.player);
+      this.particles.update();
 
       this.map.update(this.player);
     }
@@ -77,10 +83,13 @@ public class Game {
 		this.map.paintComponent(g, this.imageList);
 		this.player.paintComponent(g, this.imageList);
 
+    this.particles.paintComponent(g, imageList);
+
 		this.map.paintLighting(g, this.imageList, this.cam);
-		this.dialogue.paintComponent(g, cam);
 		this.player.paintInventory(g, this.imageList, this.cam);
 		this.deathTimer.paintComponent(g, this.imageList, this.cam);
+
+		this.dialogue.paintComponent(g, cam);
 
 		this.cam.untranslate((Graphics2D) g);
     }

@@ -1,10 +1,14 @@
 package itemPkg;
 
+import java.awt.DefaultFocusTraversalPolicy;
 import java.awt.Graphics;
 import java.awt.Point;
 
 import graphicsPkg.ImageList;
+import mainPkg.Defines;
 import mainPkg.Game;
+import particlesPkg.Particles;
+import utilsPkg.RayPoint;
 
 public class Lighters extends Item {
     private int durability;
@@ -23,13 +27,22 @@ public class Lighters extends Item {
     public int activate(Game game){
         this.durability--;
 
-        if (this.durability <= 0)
-            return -1; //Death signal
+        RayPoint playerGraphicalPoint = game.player.getPoint();
+        playerGraphicalPoint.x += Defines.tileSize/2;
 
-        if (Math.random()*100 > 50){
-            return 1;
+        if (this.durability <= 0){
+            Particles.addParticle(playerGraphicalPoint.toPoint(), new Point(0, 0), "matchFail", 0, 2, 30);
+
+            return -1; //Death signal
         }
 
+        if (Math.random()*100 > 50){
+            Particles.addParticle(playerGraphicalPoint.toPoint(), game.player.facing, "fire", 0, 3, 20);
+
+            return 1;
+        }
+        Particles.addParticle(playerGraphicalPoint.toPoint(), RayPoint.pointToRayPoint(game.player.facing).getInverted().toPoint(), "matchFail", 0, 3, 10);
+        
         return 0;
     }
 
