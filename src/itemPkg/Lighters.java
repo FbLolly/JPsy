@@ -1,6 +1,5 @@
 package itemPkg;
 
-import java.awt.DefaultFocusTraversalPolicy;
 import java.awt.Graphics;
 import java.awt.Point;
 

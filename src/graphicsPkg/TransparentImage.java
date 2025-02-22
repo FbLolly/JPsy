@@ -1,11 +1,8 @@
 package graphicsPkg;
 
-import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-
-import javax.swing.ImageIcon;
 
 public class TransparentImage {
     public static Image getTransparentImage(Image image, int transparency){ //0 is invisible, 255 is opaque
