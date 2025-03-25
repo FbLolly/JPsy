@@ -38,39 +38,33 @@ public class Player extends Entity {
     public void updateWithKeys(){
         this.movement = "idle";
 
-        if (this.inputMap.get("W") == 1){
-            this.setSpeedY(-Defines.defaultSpeed);
-            facing.x = 0; facing.y = -1;
-            this.movement = "walking";
-            this.gFacing = "up";
+        Point old = new Point(facing);
 
-            return;
-        }
-        if (this.inputMap.get("S") == 1){
-            this.setSpeedY(Defines.defaultSpeed);
-            facing.x = 0; facing.y = +1;
-            this.movement = "walking";
-            this.gFacing = "down";
+        facing.y = -this.inputMap.get("W") + this.inputMap.get("S");
+        facing.x = -this.inputMap.get("A") + this.inputMap.get("D");
 
+        if (facing.x == 0 && facing.y == 0){
+            facing = old;
             return;
         }
 
-        if (this.inputMap.get("A") == 1){
-            this.setSpeedX(-Defines.defaultSpeed);
-            facing.x = -1; facing.y = 0;
-            this.movement = "walking";
-            this.gFacing = "left";
-
-            return;
-        }
-        if (this.inputMap.get("D") == 1){
-            this.setSpeedX(Defines.defaultSpeed);
-            facing.x = +1; facing.y = 0;
-            this.movement = "walking";
+        if (facing.x == 1 && facing.y == 0){
             this.gFacing = "right";
-
-            return;
+        }else if (facing.x == -1 && facing.y == 0){
+            this.gFacing = "left";
+        }else if (facing.x == 0 && facing.y == 1){
+            this.gFacing = "down";
+        }else if (facing.x == 0 && facing.y == -1){
+            this.gFacing = "up";
+        }else{
+            facing = old;
         }
+
+        this.setSpeedX(facing.x * Defines.defaultSpeed);
+        this.setSpeedY(facing.y * Defines.defaultSpeed);
+
+        this.movement = "walking";
+        return;
     }
 
     public void sprintListen(){

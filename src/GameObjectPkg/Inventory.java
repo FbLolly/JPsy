@@ -40,7 +40,6 @@ public class Inventory {
         game.keyHandler.KeyMap.replace("F", 0);
 
         int ret = this.inv[selected].activate(game);
-        System.out.println(ret);
         switch (ret) {
             case 1:
             for (int i = 0; i < Defines.inventorySize; i++){

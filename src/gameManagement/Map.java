@@ -19,6 +19,7 @@ public class Map {
     public boolean lit;
     private Point spawn;
     public int nextRoom;
+    private int start;
 
     public Map(){
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
@@ -42,6 +43,8 @@ public class Map {
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
 
         this.lit = scan.nextBoolean();
+
+        this.start = scan.nextInt();
 
         width = scan.nextInt();
         height = scan.nextInt();
@@ -67,7 +70,7 @@ public class Map {
                         next = (int)(Math.random()*(double)Defines.floors)+10;
                     break;
                 }
-                map[ii][i].type = next;
+                map[ii][i].type = next + this.start;
                 if (next >= Defines.collidable.length){
                     map[ii][i].setCollidable(false);
                     continue;

@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import GameObjectPkg.DeathTimer;
+import GameObjectPkg.Dog;
 import GameObjectPkg.Player;
 import gameManagement.Dialogue;
 import gameManagement.Map;
@@ -17,6 +18,7 @@ import utilsPkg.RayPoint;
 public class Game {
     public Map map;
     public Player player;
+    public Dog dog;
     private Camera cam;
     private ImageList imageList;
     private DeathTimer deathTimer;
@@ -34,6 +36,7 @@ public class Game {
 
         RayPoint playerPos = this.map.getSpawn();
         this.player = new Player(playerPos.x, playerPos.y, Defines.tileSize, Defines.tileSize);
+        this.dog = new Dog(playerPos.x, playerPos.y, Defines.tileSize, Defines.tileSize, this.player);
         this.cam = new Camera(0, 0);
         this.imageList = new ImageList();
         this.deathTimer = new DeathTimer();
@@ -75,7 +78,8 @@ public class Game {
 
 		if (Defines.fontMetrics == null){
 			Defines.fontMetrics = g.getFontMetrics();
-			this.dialogue.updateShowing();
+			Dialogue.updateShowing();
+      
 		}
 
 		this.cam.translate((Graphics2D) g);

@@ -13,13 +13,13 @@ import mainPkg.Defines;
 import utilsPkg.Camera;
 
 public class Dialogue {
-    private LinkedList<String> dialogue;
-    private LinkedList<String> names;
+    public static LinkedList<String> dialogue;
+    public static LinkedList<String> names;
 
-    private String showing;
-    private int showingIdx;
+    public static String showing;
+    public static int showingIdx;
 
-    private int height;
+    public static int height;
 
     public void refresh(String number){
         //loads dialogue.txt
@@ -74,48 +74,56 @@ public class Dialogue {
     }
 
 
-    public void updateShowing(){
-        if (showingIdx >= this.names.size()){
-            this.showing = "";
-            this.showingIdx = -1;
-            return;
-        }
-
-        if (Defines.fontMetrics == null) return;
-
-        this.showing = this.names.get(showingIdx) + "@@" + this.dialogue.get(showingIdx);
-
-        int counter = 0;
-        int posX = Defines.width/80;
-        for (int i = 0; i < this.showing.length(); i++){
-            if ((showing.charAt(i) == ' ' && posX > Defines.width - Defines.width/20)){
-                posX = Defines.width/80;
-
-                showing = showing.substring(0, i-1) + "@" + showing.substring(i+1, showing.length());
+    public static void updateShowing(){
+            if (showingIdx >= names.size()){
+                showing = "";
+                showingIdx = -1;
+                return;
+            }
+    
+            if (Defines.fontMetrics == null) return;
+    
+            showing = names.get(showingIdx) + "@@" + dialogue.get(showingIdx);
+    
+            int counter = 0;
+            int posX = Defines.width/80;
+            for (int i = 0; i < showing.length(); i++){
+                if ((showing.charAt(i) == ' ' && posX > Defines.width - Defines.width/20)){
+                    posX = Defines.width/80;
+    
+                    showing = showing.substring(0, i-1) + "@" + showing.substring(i+1, showing.length());
+                    counter += 1;
+                }
+                posX += Defines.fontMetrics.stringWidth("" + showing.charAt(i));
+    
+                if (showing.charAt(i) != '@')
+                    continue;
+    
                 counter += 1;
             }
-            posX += Defines.fontMetrics.stringWidth("" + showing.charAt(i));
-
-            if (this.showing.charAt(i) != '@')
-                continue;
-
-            counter += 1;
+    
+            height = (int)((Defines.fontSize + Defines.width/180)*(counter+1));
         }
-
-        height = (int)((Defines.fontSize + Defines.width/180)*(counter+1));
+    
+        public static void Continue(){
+            if (showingIdx == -1)
+                return;
+    
+            showingIdx++;
+            updateShowing();
     }
 
     public void update(HashMap<String, Integer> map){
-        if (map.get("ENTER") == 1 && this.showingIdx != -1){
-            this.showingIdx++;
-            this.updateShowing();
+        if (map.get("ENTER") == 1 && showingIdx != -1){
+            showingIdx++;
+            updateShowing();
 
             map.replace("ENTER", 0);
         }
     }
 
     public void paintComponent(Graphics g, Camera cam){
-        if (this.showingIdx == -1)
+        if (showingIdx == -1)
             return;
 
         cam.untranslate((Graphics2D) g);

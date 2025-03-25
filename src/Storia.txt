@@ -1,0 +1,55 @@
+STORIA DEL GIOGO
+
+Pre-Atto 1:
+Scenografia: bosco fitto
+Personaggi: Protagonista e il suo baubau
+Mostri: the man from the finestrssss, ragni, scheletro
+
+Animazione (code): baubau e Protagonista camminano nel bosco.
+Il motivo deve essere mooooolto vago. Il baubau deve occasionalmente
+allontanarsi, rimanendo semrpre nella visuale. Il Protagonista non
+deve sembrare attento al cane. La quarta o quinta volta che il baubau
+si allontana, deve andare fuori dalla visuale. Dopo X tempo il che il
+baubau non torna il Protagonista deve allertarsi e inizia a correre
+per andare dietro il baubau. Arrivato a una logora casetta parte l'animazione disegnata.
+
+Animazione (disegno): the man from the finestrssss trascina il baubau
+dentro la baita. L'uomo deve essere coperto dalle tenebre, le uniche
+cose che si vedono sono: occhi, bocca e una frazione sottile del suo corpo.
+Il baubau deve avere le gambe maciullate, ma deve essere ancora vivo.
+
+Gameplay: Il Protagonista si trova a due passi dalla casetta.
+C'è solo una porta da cui entrare. Quando si entra si capisce che la
+casetta è in realtà un magazzino. Dentro c'è una traccia di sangue
+che va dall'entrata a uno stand in metallo, pieno di cianfrusaglie.
+Il Protagonista può spostare lo stand. Spostato lo stand, si apre
+un buco sul pavimento che non centra NULLA con lo stand.
+(dietro lo stand c'è comunque un buco in cui non si può entrare).
+Il Protagonista viene portato in una piccola ma non troppo stanza.
+dentro c'è la cassettiera con sopra il candelabro.
+Un foglio in carta verrà mostrato sullo schermo, perché era
+incollato al candelabro. Il foglietto dirà: "Non sono riuscita a
+recuperare le candele, l'ultima volta che Joe le aveva usate le
+ha sparse in tutta la casa. Le troverai nelle solite cassettiere. -Candice".
+Ora il Protagonista potrà muoversi verso l'unica cosa che gli interessa,
+ovvero, la prima porta. Dietro quella porta ci sarà una stanza
+completamente divisa come se qualcuno l'avesse strappata a metà.
+L'unico modo di passarla è spingere una scatola nel vuoto, così da
+fare un ponte. Passato il crepaccio si troverà la prima candela.
+Seconda porta. la stanza è riempita di trappole nascoste.
+Il Protagonista le scoprirà morendo (faccio io il concept delle trappole).
+Alla fine della stanza il Protagonista verrà premiato con la seconda candela.
+Entrando nella terza porta, la visuale tremerà, e il pavimento centrale
+della stanza crollerà. Il rumore attirerà dei ragni, che seguiranno il Protagonista.
+Se viene raggiunto parte l'animazione di morte da ragni.
+Il Protagonista dovrà passare sui bordi della stanza per outrunnare
+i ragni che lo seguono. Passata questa stanza il protagonista prende
+una cassettiera vicina e blocca la porta. La stanza in cui entra è
+coperta di roba nera, e in più sarà completamente buia.
+(dobbiamo aggiungere una scritta a intermittenza irregolare che dice "TROVA I FIAMMIFERI").
+I fiammiferi saranno a fianco di uno scheletro per terra.
+Parte l'animazione del protagonista che raccoglie i fiammiferi, ma lo
+scheletro gli affera il polso e lo fissa. Il Protagonista si spaventa
+e toglie la mano. Lo scheletro si alza e inizia a inseguire il protagonista.
+(la stanza deve essere un corridoio). Se il giocatore arriva alla fine del
+corridoio lo scheletro inciamperà e si distruggerà sul pavimento. Il protagonista passa la porta. (da qui inizia il gioco vero).
