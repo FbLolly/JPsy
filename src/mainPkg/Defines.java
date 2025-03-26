@@ -49,6 +49,8 @@ public class Defines {
 
 	public static final int inventorySize = 4;
 
+	public static boolean lockedDialogue = false;
+
 	public static Image getCurrentAnimationImage(LinkedList<Image> imgs){
 		if (imgs == null) return null;
 		if (imgs.size() == 0) return null;

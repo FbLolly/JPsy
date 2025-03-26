@@ -3,16 +3,20 @@ package gameManagement;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import GameObjectPkg.Entity;
 import GameObjectPkg.Player;
 import utilsPkg.RayRectangle;
 
 public class Collider {
-    public static void manageCollisions(Map map, Player player){
+    public static void manageCollisions(Map map, Entity entity){
         Point p;
         RayRectangle playerRect;
 
-        p = Map.getMapPosFromPoint(player.getPoint().x, player.getPoint().y);
-        playerRect = player.getRect();
+        if (entity == null)
+            return;
+
+        p = Map.getMapPosFromPoint(entity.getPoint().x, entity.getPoint().y);
+        playerRect = entity.getRect();
 
 
         for (int i = p.x-2; i < p.x+2; i++){
@@ -27,8 +31,8 @@ public class Collider {
                     continue;
 
                 Rectangle collision = new Rectangle();
-                Rectangle.intersect(player.getRect().toRect(), map.map[i][ii].getRect().toRect(), collision);
-                player.automaticRound(collision);
+                Rectangle.intersect(entity.getRect().toRect(), map.map[i][ii].getRect().toRect(), collision);
+                entity.automaticRound(collision);
             }
         }
     }

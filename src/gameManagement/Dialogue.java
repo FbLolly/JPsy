@@ -15,6 +15,7 @@ import utilsPkg.Camera;
 public class Dialogue {
     public static LinkedList<String> dialogue;
     public static LinkedList<String> names;
+    public static LinkedList<Boolean> locked;
 
     public static String showing;
     public static int showingIdx;
@@ -32,6 +33,7 @@ public class Dialogue {
 
         String currentName = "";
         String currentDialogue = "";
+        Boolean currentLocked = false;
 
         while(scan.hasNext()){
             String next = scan.next();
@@ -39,15 +41,23 @@ public class Dialogue {
             if (next.equals("{")){
                 currentName = "";
                 currentDialogue = "";
+                currentLocked = false;
                 continue;
             }
 
             if (next.equals("}")){
                 dialogue.add(currentDialogue);
                 names.add(currentName);
+                locked.add(currentLocked);
                 continue;
             }
 
+            if (next.equals("{LOCK")){
+                currentName = "";
+                currentDialogue = "";
+                currentLocked = true;
+                continue;
+            }
 
             if (currentName.equals("")){
                 currentName = next;
@@ -64,6 +74,7 @@ public class Dialogue {
     public Dialogue(String number){
         dialogue = new LinkedList<>();
         names = new LinkedList<>();
+        locked = new LinkedList<>();
 
         refresh(number);
     }
@@ -71,6 +82,7 @@ public class Dialogue {
     public Dialogue(){
         dialogue = new LinkedList<>();
         names = new LinkedList<>();
+        locked = new LinkedList<>();
     }
 
 
@@ -78,11 +90,14 @@ public class Dialogue {
             if (showingIdx >= names.size()){
                 showing = "";
                 showingIdx = -1;
+                Defines.lockedDialogue = false;
+
                 return;
             }
     
             if (Defines.fontMetrics == null) return;
     
+            Defines.lockedDialogue = locked.get(showingIdx);
             showing = names.get(showingIdx) + "@@" + dialogue.get(showingIdx);
     
             int counter = 0;

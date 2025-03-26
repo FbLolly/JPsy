@@ -36,6 +36,9 @@ public class Player extends Entity {
     }
 
     public void updateWithKeys(){
+        if (Defines.lockedDialogue)
+            return;
+
         this.movement = "idle";
 
         Point old = new Point(facing);
@@ -68,6 +71,9 @@ public class Player extends Entity {
     }
 
     public void sprintListen(){
+        if (Defines.lockedDialogue)
+            return;
+
         if (this.inputMap.get("SPACE") == 1){
             this.setSpeedX(this.getSpeedX() * 1.5);
             this.setSpeedY(this.getSpeedY() * 1.5);
@@ -94,6 +100,9 @@ public class Player extends Entity {
     }
 
     public void updateInteracting(Map map){
+        if (Defines.lockedDialogue)
+            return;
+
         Point interactingPos = getInteractingPos();
 
         if (!map.isValidPoint(interactingPos))
@@ -141,13 +150,6 @@ public class Player extends Entity {
             this.x = pos.x;
             this.y = pos.y;
         }
-    }
-
-    public void automaticRound(Rectangle rect){
-        if (rect.width > 3)
-            this.y = this.prevy;
-        if (rect.height > 3)
-            this.x = this.prevx;
     }
 
     public void paintComponent(Graphics g, ImageList imageList){

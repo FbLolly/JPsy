@@ -2,9 +2,11 @@ package mainPkg;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 
 import GameObjectPkg.DeathTimer;
 import GameObjectPkg.Dog;
+import GameObjectPkg.Entity;
 import GameObjectPkg.Player;
 import gameManagement.Dialogue;
 import gameManagement.Map;
@@ -19,7 +21,7 @@ public class Game {
     public Map map;
     public Player player;
     public Dog dog;
-    private Camera cam;
+    public Camera cam;
     private ImageList imageList;
     private DeathTimer deathTimer;
     private Dialogue dialogue;
@@ -63,38 +65,45 @@ public class Game {
       this.cam.update(this.player);
       this.player.loadInput(this.keyHandler.KeyMap);
       this.player.update(this);
+      try{
+        this.dog.update(this);
+      }catch(NullPointerException e){}
 
       this.deathTimer.update(this.map, this.player);
       this.particles.update();
 
-      this.map.update(this.player);
+      this.map.update(
+        new Entity[]{this.player, this.dog}
+      );
     }
 
     public void paintComponent(Graphics g){
-        //paint background
-		g.setColor(Defines.bgc);
-		g.fillRect(0, 0, Defines.width, Defines.height);
-		//-
+      //paint background
+      g.setColor(Defines.bgc);
+      g.fillRect(0, 0, Defines.width, Defines.height);
+      //-
 
-		if (Defines.fontMetrics == null){
-			Defines.fontMetrics = g.getFontMetrics();
-			Dialogue.updateShowing();
-      
-		}
+      if (Defines.fontMetrics == null){
+        Defines.fontMetrics = g.getFontMetrics();
+        Dialogue.updateShowing();
+      }
 
-		this.cam.translate((Graphics2D) g);
+      this.cam.translate((Graphics2D) g);
 
-		this.map.paintComponent(g, this.imageList);
-		this.player.paintComponent(g, this.imageList);
+      this.map.paintComponent(g, this.imageList);
+      this.player.paintComponent(g, this.imageList);
+      try{
+        this.dog.paintComponent(g, imageList);
+      }catch(NullPointerException e){}
 
-    this.particles.paintComponent(g, imageList);
+      this.particles.paintComponent(g, imageList);
 
-		this.map.paintLighting(g, this.imageList, this.cam);
-		this.player.paintInventory(g, this.imageList, this.cam);
-		this.deathTimer.paintComponent(g, this.imageList, this.cam);
+      this.map.paintLighting(g, this.imageList, this.cam);
+      this.player.paintInventory(g, this.imageList, this.cam);
+      this.deathTimer.paintComponent(g, this.imageList, this.cam);
 
-		this.dialogue.paintComponent(g, cam);
+      this.dialogue.paintComponent(g, cam);
 
-		this.cam.untranslate((Graphics2D) g);
+      this.cam.untranslate((Graphics2D) g);
     }
 }

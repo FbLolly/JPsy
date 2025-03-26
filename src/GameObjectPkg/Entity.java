@@ -1,16 +1,29 @@
 package GameObjectPkg;
 
+import java.awt.Rectangle;
+
 public abstract class Entity extends GameObject {
     private double speedX;
-    private double speedY;    
+    private double speedY;
+    protected double prevx, prevy;
     
     public Entity(double x, double y, double width, double height) {
         super(x, y, width, height);
     }
 
     public void update(){
+        this.prevx = this.x;
+        this.prevy = this.y;
+
         this.x += this.speedX;
         this.y += this.speedY;
+    }
+
+    public void automaticRound(Rectangle rect){
+        if (rect.width > 3)
+            this.y = this.prevy;
+        if (rect.height > 3)
+            this.x = this.prevx;
     }
 
     public double getSpeedX(){

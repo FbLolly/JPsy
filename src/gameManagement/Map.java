@@ -4,8 +4,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.xml.stream.events.EntityDeclaration;
+
+import GameObjectPkg.Entity;
 import GameObjectPkg.InteractiveObject;
 import GameObjectPkg.MapObject;
 import GameObjectPkg.Player;
@@ -94,14 +98,15 @@ public class Map {
         scan.close();
     }
 
-    public void update(Player player){
+    public void update(Entity[] entityList){
         for (int i = 0; i < Defines.mapSizeX; i++){
             for (int ii = 0; ii < Defines.mapSizeY; ii++){
                 map[i][ii].update();
             }
         }
 
-        Collider.manageCollisions(this, player);
+        for (Entity e : entityList)
+            Collider.manageCollisions(this, e);
     }
 
     public void paintComponent(Graphics g, ImageList imageList){
