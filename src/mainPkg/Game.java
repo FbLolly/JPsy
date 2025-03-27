@@ -2,7 +2,6 @@ package mainPkg;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 
 import GameObjectPkg.DeathTimer;
 import GameObjectPkg.Dog;
@@ -24,7 +23,7 @@ public class Game {
     public Camera cam;
     private ImageList imageList;
     private DeathTimer deathTimer;
-    private Dialogue dialogue;
+    public Dialogue dialogue;
 
     public KeyHandler keyHandler;
     private Mouse mouse;
@@ -34,15 +33,15 @@ public class Game {
     private JApp app; //only used for input, nothing else
 
     public Game(JApp app){
-        this.map = new Map("1");
+        this.dialogue = new Dialogue();
+        this.map = new Map(1, this);
 
         RayPoint playerPos = this.map.getSpawn();
         this.player = new Player(playerPos.x, playerPos.y, Defines.tileSize, Defines.tileSize);
         this.dog = new Dog(playerPos.x, playerPos.y, Defines.tileSize, Defines.tileSize, this.player);
         this.cam = new Camera(0, 0);
         this.imageList = new ImageList();
-        this.deathTimer = new DeathTimer();
-        this.dialogue = new Dialogue("1");
+        this.deathTimer = new DeathTimer(Defines.standardDeathTimer);
 
         this.keyHandler = new KeyHandler();
         this.mouse = new Mouse();
@@ -105,5 +104,9 @@ public class Game {
       this.dialogue.paintComponent(g, cam);
 
       this.cam.untranslate((Graphics2D) g);
+    }
+
+    public void changeDialogue(int dialogue){
+      this.dialogue.refresh(dialogue);
     }
 }

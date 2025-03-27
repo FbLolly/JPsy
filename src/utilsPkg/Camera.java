@@ -37,7 +37,7 @@ public class Camera{
         this.timer++;
         Defines.lockedDialogue = true;
 
-        if (this.timer % (int)(this.time/(20*intensity)) == 0){
+        if (this.timer % (int)(this.time/(10*intensity)) == 0){
             this.x += intensity*100*change;
             change *= -1;
         }

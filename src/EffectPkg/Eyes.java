@@ -12,7 +12,7 @@ import utilsPkg.Camera;
 
 public class Eyes {
     private Point playerPos;
-    ArrayList<Point> randoms;
+    public ArrayList<Point> randoms;
     private boolean start;
     private boolean noise;
 

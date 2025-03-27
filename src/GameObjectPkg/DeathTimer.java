@@ -12,11 +12,13 @@ import utilsPkg.Camera;
 
 public class DeathTimer {
     public int timer;
+    private int time;
     public boolean lit;
     private Eyes eyes;
 
-    public DeathTimer(){
-        this.timer = 30;
+    public DeathTimer(int time){
+        this.time = time;
+        this.timer = this.time;
     }
 
     public void update(Map map, Player player){
@@ -31,9 +33,11 @@ public class DeathTimer {
         
         if (this.timer <= 0){
             this.lit = true;
+
+            //kill the player
         }
 
-        if (this.timer < 20 && this.eyes == null){
+        if (this.timer < this.time*(double)(2.0/3.0) && this.eyes == null){
             this.eyes = new Eyes();
         }
 

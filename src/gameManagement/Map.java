@@ -15,6 +15,7 @@ import GameObjectPkg.MapObject;
 import GameObjectPkg.Player;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
+import mainPkg.Game;
 import utilsPkg.Camera;
 import utilsPkg.RayPoint;
 
@@ -36,7 +37,7 @@ public class Map {
             }
         }
     }
-    public Map(String fileName){
+    public Map(int fileName, Game game){
         InputStream is = this.getClass().getResourceAsStream("maps/"+fileName+".txt");
         if (is == null)
             return;
@@ -59,6 +60,8 @@ public class Map {
         nextRoom = scan.nextInt();
 
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
+
+        game.changeDialogue(fileName);
 
         for (int i = 0; i < height; i++){
             for (int ii = 0; ii < width; ii++){
@@ -152,5 +155,9 @@ public class Map {
         y += Defines.tileSize/2;
 
         return new Point((int)(x/Defines.tileSize), (int)(y/Defines.tileSize));
+    }
+
+    public MapObject indexedEntry(int i, int ii){
+        return this.map[i][ii];
     }
 }

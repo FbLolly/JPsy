@@ -32,7 +32,6 @@ public class MapObject extends GameObject {
         if (this.type >= 30 && this.type < 40){
             //just a floor effect
 
-            System.out.println(this.type);
             g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("10", (int)Defines.tileSize, (int)Defines.tileSize)), (int)this.x, (int)this.y, null);
         }
         g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(""+this.type, (int)Defines.tileSize, (int)Defines.tileSize)), (int)this.x, (int)this.y, null);

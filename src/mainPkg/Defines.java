@@ -47,9 +47,12 @@ public class Defines {
 
 	public static final boolean[] collidable = {false, true, true, true, true, true, true, true, true};
 
+	public static final int standardDeathTimer = 60;
+
 	public static final int inventorySize = 4;
 
 	public static boolean lockedDialogue = false;
+	public static boolean timeStop = false;
 
 	public static Image getCurrentAnimationImage(LinkedList<Image> imgs){
 		if (imgs == null) return null;

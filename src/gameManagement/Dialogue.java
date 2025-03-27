@@ -22,8 +22,12 @@ public class Dialogue {
 
     public static int height;
 
-    public void refresh(String number){
+    public void refresh(int number){
         //loads dialogue.txt
+
+        dialogue = new LinkedList<>();
+        names = new LinkedList<>();
+        locked = new LinkedList<>();
 
         showing = "";
         showingIdx = 0;
@@ -71,7 +75,7 @@ public class Dialogue {
         updateShowing();
     }
 
-    public Dialogue(String number){
+    public Dialogue(int number){
         dialogue = new LinkedList<>();
         names = new LinkedList<>();
         locked = new LinkedList<>();

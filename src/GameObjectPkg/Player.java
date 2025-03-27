@@ -9,6 +9,7 @@ import gameManagement.Map;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
 import mainPkg.Game;
+import particlesPkg.Particles;
 import utilsPkg.Camera;
 import utilsPkg.RayPoint;
 
@@ -144,14 +145,24 @@ public class Player extends Entity {
         inv.update(game);
 
         if (!game.map.isValidPoint(Map.getMapPosFromPoint(x, y))){
-            game.map = new Map(""+game.map.nextRoom);
+            game.map = new Map(game.map.nextRoom, game);
             
             RayPoint pos = game.map.getSpawn();
             this.x = pos.x;
             this.y = pos.y;
         }
-    }
 
+        /* walking effects */
+
+        Point p = Map.getMapPosFromPoint(this.x, this.y);
+        if (game.map.indexedEntry(p.x, p.y).type == 30 && !(this.movement.equals("idle"))){
+            if (Defines.timer % (int)(Defines.FPS/4) != 0)
+                return;
+
+            Particles.addParticle(new Point((int)(this.x + Defines.tileSize/2.0), (int)(this.y + Defines.tileSize/2.0)), new Point(0, 0), "blood", 0.2, 0.4, 5);
+        }
+    }
+ 
     public void paintComponent(Graphics g, ImageList imageList){
         g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(this.movement+"_"+this.gFacing, (int)Defines.tileSize*2, (int)Defines.tileSize*2)),
                     (int)(this.x - Defines.tileSize/2), (int)(this.y - Defines.tileSize), null);
