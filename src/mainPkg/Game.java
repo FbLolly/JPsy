@@ -9,7 +9,9 @@ import GameObjectPkg.Entity;
 import GameObjectPkg.Player;
 import gameManagement.Dialogue;
 import gameManagement.Map;
+import gameManagement.ObjectEventHandler;
 import graphicsPkg.ImageList;
+import menusPkg.DeathScreen;
 import particlesPkg.Particles;
 import utilsPkg.Camera;
 import utilsPkg.KeyHandler;
@@ -22,8 +24,11 @@ public class Game {
     public Dog dog;
     public Camera cam;
     private ImageList imageList;
-    private DeathTimer deathTimer;
+    public DeathTimer deathTimer;
     public Dialogue dialogue;
+    public ObjectEventHandler oeh;
+
+    public DeathScreen ds = new DeathScreen(this);
 
     public KeyHandler keyHandler;
     private Mouse mouse;
@@ -35,6 +40,7 @@ public class Game {
     public Game(JApp app){
         this.dialogue = new Dialogue();
         this.map = new Map(1, this);
+        this.oeh = new ObjectEventHandler();
 
         RayPoint playerPos = this.map.getSpawn();
         this.player = new Player(playerPos.x, playerPos.y, Defines.tileSize, Defines.tileSize);

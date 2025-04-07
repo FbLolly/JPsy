@@ -12,7 +12,7 @@ import utilsPkg.Camera;
 
 public class DeathTimer {
     public int timer;
-    private int time;
+    public int time;
     public boolean lit;
     private Eyes eyes;
 
@@ -28,7 +28,7 @@ public class DeathTimer {
             return;
         }
         
-        if (Defines.timer > Defines.FPS)
+        if (Defines.timer > Defines.FPS && (!Defines.lockedDialogue))
             this.timer--;
         
         if (this.timer <= 0){

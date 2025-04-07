@@ -26,6 +26,8 @@ public class Map {
     public int nextRoom;
     private int start;
 
+    public int name;
+
     public Map(){
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
 
@@ -38,6 +40,8 @@ public class Map {
         }
     }
     public Map(int fileName, Game game){
+        this.name = fileName;
+
         InputStream is = this.getClass().getResourceAsStream("maps/"+fileName+".txt");
         if (is == null)
             return;

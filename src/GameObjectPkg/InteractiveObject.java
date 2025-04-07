@@ -6,6 +6,7 @@ import graphicsPkg.ImageList;
 import itemPkg.Candle;
 import itemPkg.Lighters;
 import mainPkg.Defines;
+import mainPkg.Game;
 
 public class InteractiveObject extends MapObject {
     private int drawType;
@@ -19,10 +20,12 @@ public class InteractiveObject extends MapObject {
         this.drawType = (int)(Math.random()*4)+10;
     }
 
-    public void interact(Player player){
+    public void interact(Player player, Game game){
         if (!this.isInteractable())
             return;
 
+        game.oeh.ManageEvent(game, this.type);
+        
         switch (this.type) {
             case 20:
                 player.inv.addToInv(new Candle());

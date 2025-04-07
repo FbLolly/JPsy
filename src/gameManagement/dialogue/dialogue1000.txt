@@ -1,0 +1,33 @@
+{LOCK
+_
+
+There seems to be a note someone left on this object@
+[ENTER] to read it...
+}
+
+{LOCK
+Note
+    
+Hii~@
+Sorry I couldnt get the candles for the lighing@
+Last time they were used was when Josh had@
+to clean up [ENTER]
+}
+
+{LOCK
+Note
+
+Unfortunately I dont think he really bothered@
+putting them back in their places, just look@
+around the house!! im sure you will find them!! [ENTER]
+}
+
+{LOCK
+Narrator
+
+Just remember dear player@
+@
+@
+@
+You are never alone.
+}

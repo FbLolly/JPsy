@@ -100,24 +100,24 @@ public class Player extends Entity {
         );
     }
 
-    public void updateInteracting(Map map){
+    public void updateInteracting(Game game){
         if (Defines.lockedDialogue)
             return;
 
         Point interactingPos = getInteractingPos();
 
-        if (!map.isValidPoint(interactingPos))
+        if (!game.map.isValidPoint(interactingPos))
             return;
 
         if (this.inputMap.get("E") != 1)
             return;
         this.inputMap.replace("E", 0);
 
-        if (!map.map[interactingPos.x][interactingPos.y].isInteractable())
+        if (!game.map.map[interactingPos.x][interactingPos.y].isInteractable())
             return;
 
-        InteractiveObject obj = (InteractiveObject) map.map[interactingPos.x][interactingPos.y];
-        obj.interact(this);
+        InteractiveObject obj = (InteractiveObject) game.map.map[interactingPos.x][interactingPos.y];
+        obj.interact(this, game);
     }
 
     public void updatePos(){
@@ -141,7 +141,7 @@ public class Player extends Entity {
 
         super.update();
 
-        this.updateInteracting(game.map);
+        this.updateInteracting(game);
         inv.update(game);
 
         if (!game.map.isValidPoint(Map.getMapPosFromPoint(x, y))){

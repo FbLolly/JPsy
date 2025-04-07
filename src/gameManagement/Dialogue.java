@@ -21,9 +21,11 @@ public class Dialogue {
     public static int showingIdx;
 
     public static int height;
+    private boolean exists;
 
     public void refresh(int number){
         //loads dialogue.txt
+        this.exists = true;
 
         dialogue = new LinkedList<>();
         names = new LinkedList<>();
@@ -33,6 +35,11 @@ public class Dialogue {
         showingIdx = 0;
 
         InputStream is = this.getClass().getResourceAsStream("dialogue/dialogue" + number + ".txt");
+        if (is == null){
+            this.exists = false;
+            return;
+        }
+
         Scanner scan = new Scanner(is);
 
         String currentName = "";
@@ -142,7 +149,7 @@ public class Dialogue {
     }
 
     public void paintComponent(Graphics g, Camera cam){
-        if (showingIdx == -1)
+        if (showingIdx == -1 || !this.exists)
             return;
 
         cam.untranslate((Graphics2D) g);
