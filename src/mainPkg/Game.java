@@ -13,6 +13,7 @@ import gameManagement.ObjectEventHandler;
 import graphicsPkg.ImageList;
 import menusPkg.DeathScreen;
 import particlesPkg.Particles;
+import saves.Save;
 import utilsPkg.Camera;
 import utilsPkg.KeyHandler;
 import utilsPkg.Mouse;
@@ -93,15 +94,21 @@ public class Game {
         Dialogue.updateShowing();
       }
 
+      if (Defines.scale){
+        Defines.scale = true;
+        ((Graphics2D) g).scale(Defines.zoom, Defines.zoom);
+      }
+
       this.cam.translate((Graphics2D) g);
 
-      this.map.paintComponent(g, this.imageList);
+      this.map.paintComponent(g, this.imageList, cam);
       this.player.paintComponent(g, this.imageList);
       try{
         this.dog.paintComponent(g, imageList);
       }catch(NullPointerException e){}
 
       this.particles.paintComponent(g, imageList);
+
 
       this.map.paintLighting(g, this.imageList, this.cam);
       this.player.paintInventory(g, this.imageList, this.cam);

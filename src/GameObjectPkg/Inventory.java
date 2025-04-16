@@ -21,6 +21,23 @@ public class Inventory {
         selected = 0;
     }
 
+    public Inventory(String[] items, Integer count){ //count is only needed if there is a chandellier
+        inv = new Item[Defines.inventorySize];
+
+        if (items.length > Defines.inventorySize){
+            System.err.println("Item inventory load overflow");
+            return;
+        }
+        
+        selected = 0;
+
+        for (int i = 0; i < items.length; i++){
+            switch (items[i]) {
+                
+            }
+        }
+    }
+
     public void update(Game game){
         for (int i = 0; i < Defines.inventorySize; i++){
             if (game.player.inputMap.get((i+1) + "") == 1)
@@ -80,11 +97,23 @@ public class Inventory {
             
             if (this.selected == i){
                 size = Defines.selectedInvSize;
-                g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("selectedSlot", (int)Defines.selectedInvSize, (int)Defines.selectedInvSize)),
-                                                             (int)(defx + Defines.invTileSize/2.0 - Defines.selectedInvSize/2.0), defy, null);
+                g.drawImage(Defines.getCurrentAnimationImage(
+                    imageList.getImages(
+                        "selectedSlot",
+                        (int)Defines.selectedInvSize,
+                        (int)Defines.selectedInvSize)),
+                    (int)((int)(defx + Defines.invTileSize/2.0 - Defines.selectedInvSize/2.0)),
+                    defy, null);
+            
             }else{
                 size = Defines.invTileSize;
-                g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("slot", (int)Defines.invTileSize, (int)Defines.invTileSize)), defx, defy, null);
+                g.drawImage(Defines.getCurrentAnimationImage(
+                    imageList.getImages(
+                        "slot",
+                        (int)Defines.invTileSize,
+                        (int)Defines.invTileSize)),
+                    defx, defy, null);
+
             }
 
             if (this.inv[i] != null)

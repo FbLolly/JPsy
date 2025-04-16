@@ -10,6 +10,8 @@ import java.io.InputStream;
 
 import javax.swing.JPanel;
 
+import saves.Save;
+
 public class JApp extends JPanel implements Runnable{
 	private double drawInterval;
 	private double nextDrawTime;

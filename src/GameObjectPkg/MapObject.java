@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
+import utilsPkg.Camera;
 
 public class MapObject extends GameObject {
     private boolean collidable;
@@ -25,16 +26,16 @@ public class MapObject extends GameObject {
         this.collidable = collidable;
     }
 
-    public void paintComponent(Graphics g, ImageList imageList){
+    public void paintComponent(Graphics g, ImageList imageList, Camera cam){
         if (this.outsideCamera())
             return;
         
         if (this.type >= 30 && this.type < 40){
             //just a floor effect
 
-            g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("10", (int)Defines.tileSize, (int)Defines.tileSize)), (int)this.x, (int)this.y, null);
+            cam.paintImage(Defines.getCurrentAnimationImage(imageList.getImages("10", (int)Defines.tileSize, (int)Defines.tileSize)), (int)this.x, (int)this.y, g);
         }
-        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(""+this.type, (int)Defines.tileSize, (int)Defines.tileSize)), (int)this.x, (int)this.y, null);
+        cam.paintImage(Defines.getCurrentAnimationImage(imageList.getImages(""+this.type, (int)Defines.tileSize, (int)Defines.tileSize)), (int)this.x, (int)this.y, g);
     }
 
     public boolean isInteractable(){

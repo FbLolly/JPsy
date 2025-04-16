@@ -18,6 +18,13 @@ public class Candle extends Item {
         this.lit = false;
         this.ID = "Item@Candle";
     }
+
+    public int getCandleCount(){
+        return this.candleCount;
+    }
+    public void setCandleCount(int candleCount){
+        this.candleCount = candleCount;
+    }
     
     public void addCandle(){
         if (candleCount > 3)

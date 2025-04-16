@@ -29,25 +29,5 @@ public class DeathScreen {
 
         int rand = (int)(Math.random()*deathMessages.size());
         message = deathMessages.get(rand);
-
-        //SAVE EVERYTHING
-        saveGame(game);
-    }
-
-    public void recovery(){
-    }
-
-    public void saveGame(Game game){
-        //FileWriter file = null;
-        //
-        //try {
-        //    file = new FileWriter("src/saves/player.txt");
-        //
-        //    file.write(game.player.getX() + "\n" + game.player.getY() + "\n" );
-//
-        //    file.close();
-        //} catch (IOException e) {
-        //    e.printStackTrace();
-        //}
     }
 }

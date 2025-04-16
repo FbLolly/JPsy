@@ -7,6 +7,10 @@ import java.util.LinkedList;
 
 import javax.swing.JComponent;
 
+import itemPkg.Candle;
+import itemPkg.Item;
+import itemPkg.Lighters;
+
 public class Defines {
 	public static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 
@@ -25,7 +29,7 @@ public class Defines {
 	public static final int buttonAnimationSpeed = 7;
 
 	public static final double defaultSpeed = 3;
-	public static final double runningSpeed = 5;
+	public static final double runningSpeed = 7;
 
 	public static final double tileSize = Defines.width/50;
 	public static final double invTileSize = Defines.width/20;
@@ -45,6 +49,9 @@ public class Defines {
 	public static final Color bgc = new Color(37, 19, 26);
 	public static final int floors = 4;
 
+	public static double zoom = 1.5;
+	public static boolean scale = true;
+
 	public static final boolean[] collidable = {false, true, true, true, true, true, true, true, true};
 
 	public static final int standardDeathTimer = 60;
@@ -53,6 +60,13 @@ public class Defines {
 
 	public static boolean lockedDialogue = false;
 	public static boolean timeStop = false;
+
+	public static int getNonScaledX(double mult){
+		return (int)(-Defines.width / 3.0 * (Defines.zoom-1.0) * mult);
+	}
+	public static int getNonScaledY(double mult){
+		return (int)(-Defines.height / 3.0 * (Defines.zoom-1.0) * mult);
+	}
 
 	public static Image getCurrentAnimationImage(LinkedList<Image> imgs){
 		if (imgs == null) return null;
@@ -69,5 +83,20 @@ public class Defines {
 			return null;
 
 		return imgs.get(idx);
+	}
+
+	public static Item getItem(String string){
+		Item i = null;
+		
+		switch (string){
+			case "Item@Candle":
+				i = new Candle();
+				break;
+			case "Item@Lighters":
+				i = new Lighters();
+				break;
+		}
+
+		return i;
 	}
 }

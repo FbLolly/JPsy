@@ -1,7 +1,7 @@
 {LOCK
 Narrator
 
-nigggggg
+Ur Locked
 }
 
 {
@@ -13,5 +13,5 @@ puoi muoverti
 {LOCK
 Narrator
 
-nigger stavo scherzando
+Locked Again, press enter to exit dialogue and unlock
 }

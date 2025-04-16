@@ -56,7 +56,7 @@ public class DeathTimer {
         cam.untranslate((Graphics2D) g);
 
         g.setColor(Color.red);
-        g.drawString(""+this.timer, Defines.width/2 + (int)Defines.tileSize - (int)(Defines.fontMetrics.stringWidth(""+this.timer))/2, (int)(Defines.height/3));
+        g.drawString(""+this.timer, Defines.getNonScaledX(1) + Defines.width/2 + (int)Defines.tileSize - (int)(Defines.fontMetrics.stringWidth(""+this.timer))/2, Defines.getNonScaledY(1) + (int)(Defines.height/3));
         
         if (this.eyes != null)
             this.eyes.paintStatic(g, imageList, cam);

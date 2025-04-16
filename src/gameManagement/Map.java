@@ -24,31 +24,21 @@ public class Map {
     public boolean lit;
     private Point spawn;
     public int nextRoom;
-    private int start;
+    public int start;
+    public int width, height;
+    public ArrayList<Point> interactibles;
 
     public int name;
 
     public Map(){
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
-
-        //creates an empty map
-
-        for (int i = 0; i < Defines.mapSizeX; i++){
-            for (int ii = 0; ii < Defines.mapSizeY; ii++){
-                map[i][ii] = new MapObject(i*Defines.tileSize, ii*Defines.tileSize, Defines.tileSize, Defines.tileSize, true, 1);
-            }
-        }
     }
-    public Map(int fileName, Game game){
-        this.name = fileName;
 
-        InputStream is = this.getClass().getResourceAsStream("maps/"+fileName+".txt");
+    public void load(InputStream is, Game game, int fileName){
         if (is == null)
             return;
         Scanner scan = new Scanner(is);
 
-        int width;
-        int height;
         this.map = new MapObject[Defines.mapSizeX][Defines.mapSizeY];
 
         this.lit = scan.nextBoolean();
@@ -100,9 +90,20 @@ public class Map {
             map[next.x][next.y] = new InteractiveObject(next.x*Defines.tileSize, next.y*Defines.tileSize,
                                                         Defines.tileSize, Defines.tileSize, map[next.x][next.y].isCollidable(),
                                                         map[next.x][next.y].type);
+            interactibles.add(next);
         }
 
         scan.close();
+    }
+
+    public Map(int fileName, Game game){
+        this.name = fileName;
+
+        interactibles = new ArrayList<>();
+
+        InputStream is = this.getClass().getResourceAsStream("maps/"+fileName+".txt");
+        
+        this.load(is, game, fileName);
     }
 
     public void update(Entity[] entityList){
@@ -116,13 +117,14 @@ public class Map {
             Collider.manageCollisions(this, e);
     }
 
-    public void paintComponent(Graphics g, ImageList imageList){
+    public void paintComponent(Graphics g, ImageList imageList, Camera cam){
         for (int i = 0; i < Defines.mapSizeX; i++){
             for (int ii = 0; ii < Defines.mapSizeY; ii++){
                 if (this.map[i][ii].type < 0)
                     continue;
 
-                map[i][ii].paintComponent(g, imageList);
+
+                map[i][ii].paintComponent(g, imageList, cam);
             }
         }
     }
@@ -133,7 +135,7 @@ public class Map {
 
         cam.untranslate((Graphics2D) g);
 
-        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("0", Defines.width, Defines.height)), 0, 0, null);
+        cam.paintImage(Defines.getCurrentAnimationImage(imageList.getImages("0", Defines.width, Defines.height)), Defines.getNonScaledX(1), Defines.getNonScaledY(1), g);
 
         cam.translate((Graphics2D) g);
     }

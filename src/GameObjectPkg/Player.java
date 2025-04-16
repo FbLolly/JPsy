@@ -10,6 +10,7 @@ import graphicsPkg.ImageList;
 import mainPkg.Defines;
 import mainPkg.Game;
 import particlesPkg.Particles;
+import saves.Save;
 import utilsPkg.Camera;
 import utilsPkg.RayPoint;
 
@@ -78,6 +79,7 @@ public class Player extends Entity {
         if (this.inputMap.get("SPACE") == 1){
             this.setSpeedX(this.getSpeedX() * 1.5);
             this.setSpeedY(this.getSpeedY() * 1.5);
+            Defines.timer = 1;
 
             if (this.movement.equals("walking"))
                 this.movement = "running";
@@ -145,8 +147,10 @@ public class Player extends Entity {
         inv.update(game);
 
         if (!game.map.isValidPoint(Map.getMapPosFromPoint(x, y))){
+            Save.saveEverything(game);
+
             game.map = new Map(game.map.nextRoom, game);
-            
+
             RayPoint pos = game.map.getSpawn();
             this.x = pos.x;
             this.y = pos.y;

@@ -1,6 +1,8 @@
 package utilsPkg;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 
 import GameObjectPkg.GameObject;
 import mainPkg.Defines;
@@ -51,8 +53,14 @@ public class Camera{
 
         RayRectangle p = player.getRect();
         
-        this.x = -p.x + Defines.width/2 + p.width/2.0;
-        this.y = -p.y + Defines.height/2 + p.width/2.0;
+        this.x = -((double)p.x) + Defines.width/Defines.zoom/2.0 + p.width/2.0;
+        this.y = -((double)p.y) + Defines.height/Defines.zoom/2.0 + p.width/2.0;
+    }
+
+    public void paintImage(Image image, int x, int y, Graphics g){
+        Graphics2D g2 = (Graphics2D) g;
+        
+        g2.drawImage(image, x, y, null);
     }
 
     public void translate(Graphics2D g){
