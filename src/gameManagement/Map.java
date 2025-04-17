@@ -1,7 +1,6 @@
 package gameManagement;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.io.InputStream;
 import java.util.ArrayList;
