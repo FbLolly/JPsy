@@ -7,12 +7,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.xml.stream.events.EntityDeclaration;
-
 import GameObjectPkg.Entity;
 import GameObjectPkg.InteractiveObject;
 import GameObjectPkg.MapObject;
-import GameObjectPkg.Player;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
 import mainPkg.Game;

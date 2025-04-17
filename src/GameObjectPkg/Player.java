@@ -2,7 +2,6 @@ package GameObjectPkg;
 
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.util.HashMap;
 
 import gameManagement.Map;
@@ -11,12 +10,10 @@ import mainPkg.Defines;
 import mainPkg.Game;
 import particlesPkg.Particles;
 import saves.Save;
-import utilsPkg.Camera;
 import utilsPkg.RayPoint;
 
 public class Player extends Entity {
     public HashMap<String, Integer> inputMap;
-    private double prevx, prevy;
     public Point facing;
     public Inventory inv;
 
@@ -172,7 +169,7 @@ public class Player extends Entity {
                     (int)(this.x - Defines.tileSize/2), (int)(this.y - Defines.tileSize), null);
     }
 
-    public void paintInventory(Graphics g, ImageList imageList, Camera cam){
-        inv.paintComponent(g, imageList, cam);
+    public void paintInventory(Graphics g, Game game){
+        inv.paintComponent(g, game);
     }
 }

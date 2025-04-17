@@ -7,8 +7,6 @@ import graphicsPkg.ImageList;
 import mainPkg.Defines;
 import mainPkg.Game;
 import particlesPkg.Particles;
-import utilsPkg.Camera;
-import utilsPkg.RayPoint;
 
 public class Dog extends Entity {
     private Entity follow;

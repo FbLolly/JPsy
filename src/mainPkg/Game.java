@@ -13,7 +13,6 @@ import gameManagement.ObjectEventHandler;
 import graphicsPkg.ImageList;
 import menusPkg.DeathScreen;
 import particlesPkg.Particles;
-import saves.Save;
 import utilsPkg.Camera;
 import utilsPkg.KeyHandler;
 import utilsPkg.Mouse;
@@ -24,7 +23,7 @@ public class Game {
     public Player player;
     public Dog dog;
     public Camera cam;
-    private ImageList imageList;
+    public ImageList imageList;
     public DeathTimer deathTimer;
     public Dialogue dialogue;
     public ObjectEventHandler oeh;
@@ -33,6 +32,8 @@ public class Game {
 
     public KeyHandler keyHandler;
     private Mouse mouse;
+
+    private Overlay overlay;
 
     Particles particles;
 
@@ -54,8 +55,10 @@ public class Game {
         this.mouse = new Mouse();
 
         this.particles = new Particles();
-
         this.app = app;
+
+        this.overlay = new Overlay(this);
+        this.app.add(this.overlay);
     }
 
     public void updateIO(){
@@ -94,10 +97,7 @@ public class Game {
         Dialogue.updateShowing();
       }
 
-      if (Defines.scale){
-        Defines.scale = true;
-        ((Graphics2D) g).scale(Defines.zoom, Defines.zoom);
-      }
+      ((Graphics2D) g).scale(Defines.zoom, Defines.zoom);
 
       this.cam.translate((Graphics2D) g);
 
@@ -109,14 +109,10 @@ public class Game {
 
       this.particles.paintComponent(g, imageList);
 
+      this.player.paintInventory(g, this);
 
       this.map.paintLighting(g, this.imageList, this.cam);
-      this.player.paintInventory(g, this.imageList, this.cam);
-      this.deathTimer.paintComponent(g, this.imageList, this.cam);
-
-      this.dialogue.paintComponent(g, cam);
-
-      this.cam.untranslate((Graphics2D) g);
+      this.overlay.repaint();
     }
 
     public void changeDialogue(int dialogue){

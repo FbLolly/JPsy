@@ -31,10 +31,10 @@ public class Defines {
 	public static final double defaultSpeed = 3;
 	public static final double runningSpeed = 7;
 
-	public static final double tileSize = Defines.width/50;
-	public static final double invTileSize = Defines.width/20;
-	public static final double invItemSize = Defines.width/25;
-	public static final double selectedInvSize = Defines.width/18;
+	public static final int tileSize = Defines.width/50;
+	public static final int invTileSize = Defines.width/35;
+	public static final int invItemSize = Defines.width/40;
+	public static final int selectedInvSize = Defines.width/33;
 
 	public static final int lighterDurability = 20;
 

@@ -9,7 +9,6 @@ import GameObjectPkg.Inventory;
 import GameObjectPkg.Player;
 import gameManagement.Map;
 import itemPkg.Candle;
-import itemPkg.Item;
 import mainPkg.Defines;
 import mainPkg.Game;
 

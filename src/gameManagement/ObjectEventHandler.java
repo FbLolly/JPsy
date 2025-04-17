@@ -1,7 +1,5 @@
 package gameManagement;
 
-import java.util.HashMap;
-
 import mainPkg.Game;
 
 public class ObjectEventHandler {

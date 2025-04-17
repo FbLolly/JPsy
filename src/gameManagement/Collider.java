@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 import GameObjectPkg.Entity;
-import GameObjectPkg.Player;
 import utilsPkg.RayRectangle;
 
 public class Collider {

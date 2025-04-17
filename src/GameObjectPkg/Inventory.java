@@ -1,15 +1,12 @@
 package GameObjectPkg;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
 
-import graphicsPkg.ImageList;
 import itemPkg.Candle;
 import itemPkg.Item;
 import mainPkg.Defines;
 import mainPkg.Game;
-import utilsPkg.Camera;
 
 public class Inventory {
     public Item[] inv;
@@ -86,11 +83,9 @@ public class Inventory {
         }
     }
 
-    public void paintComponent(Graphics g, ImageList imageList, Camera cam){
-        cam.untranslate((Graphics2D) g);
-
-        int defx = Defines.width - (int)Defines.invTileSize*2;
-        int defy = (Defines.height/2) - (int)(Defines.invTileSize*1.5) - (int)Defines.invTileSize;
+    public void paintComponent(Graphics g, Game game){
+        int defx = (int)game.player.x - (int)Defines.invTileSize;
+        int defy = (int)game.player.y - (int)(Defines.invTileSize*1.5) - (int)Defines.invTileSize;
 
         for (int i = 0; i < Defines.inventorySize; i++){
             double size = 0;
@@ -98,7 +93,7 @@ public class Inventory {
             if (this.selected == i){
                 size = Defines.selectedInvSize;
                 g.drawImage(Defines.getCurrentAnimationImage(
-                    imageList.getImages(
+                    game.imageList.getImages(
                         "selectedSlot",
                         (int)Defines.selectedInvSize,
                         (int)Defines.selectedInvSize)),
@@ -108,7 +103,7 @@ public class Inventory {
             }else{
                 size = Defines.invTileSize;
                 g.drawImage(Defines.getCurrentAnimationImage(
-                    imageList.getImages(
+                    game.imageList.getImages(
                         "slot",
                         (int)Defines.invTileSize,
                         (int)Defines.invTileSize)),
@@ -118,11 +113,9 @@ public class Inventory {
 
             if (this.inv[i] != null)
                 this.inv[i].paintComponent(g, new Point((int)(defx + Defines.invTileSize/2.0 - Defines.invItemSize/2.0),
-                                                        (int)(defy + Defines.invTileSize/2.0 - Defines.invItemSize/2.0)), imageList);
+                                                        (int)(defy + Defines.invTileSize/2.0 - Defines.invItemSize/2.0)), game.imageList);
             
             defy += size + size/3.0;
         }
-
-        cam.translate((Graphics2D) g);
     }
 }

@@ -9,7 +9,7 @@ import mainPkg.Defines;
 
 public class Camera{
     private double x, y;
-    private int timer, helper, time;
+    private int timer, time;
     private double intensity;
     private int change;
 
@@ -22,7 +22,6 @@ public class Camera{
 
     public void shake(double intensity, int time){ //time is in frames
         if (this.timer == 0){
-            this.helper = (int)this.x;
             this.time = time;
             this.intensity = intensity;
         }

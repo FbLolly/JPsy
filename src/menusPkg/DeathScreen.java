@@ -1,18 +1,14 @@
 package menusPkg;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import mainPkg.Game;
 
 public class DeathScreen {
-    private String message;
-    
+    public String message;
+
     public DeathScreen(Game game){
         InputStream is = this.getClass().getResourceAsStream("../gameManagement/dialogue/deathMessages.txt");
         if (is == null){
