@@ -109,10 +109,9 @@ public class Game {
 
       this.particles.paintComponent(g, imageList);
 
+      this.map.paintLighting(g, this);
       this.player.paintInventory(g, this);
-
-      this.map.paintLighting(g, this.imageList, this.cam);
-      this.overlay.repaint();
+      this.dialogue.paintComponent(g, this);
     }
 
     public void changeDialogue(int dialogue){

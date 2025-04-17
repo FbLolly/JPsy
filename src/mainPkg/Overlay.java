@@ -27,6 +27,5 @@ public class Overlay extends JPanel {
 
         this.game.deathTimer.paintComponent(g, this.game.imageList, this.game.cam);
 
-        this.game.dialogue.paintComponent(g, this.game.cam);
     }
 }

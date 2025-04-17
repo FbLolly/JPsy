@@ -84,7 +84,7 @@ public class Inventory {
     }
 
     public void paintComponent(Graphics g, Game game){
-        int defx = (int)game.player.x - (int)Defines.invTileSize;
+        int defx = (int)game.player.x - (int)(Defines.invTileSize*1.5);
         int defy = (int)game.player.y - (int)(Defines.invTileSize*1.5) - (int)Defines.invTileSize;
 
         for (int i = 0; i < Defines.inventorySize; i++){

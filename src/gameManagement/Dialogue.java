@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 import mainPkg.Defines;
-import utilsPkg.Camera;
+import mainPkg.Game;
 
 public class Dialogue {
     public static LinkedList<String> dialogue;
@@ -129,6 +129,7 @@ public class Dialogue {
             }
     
             height = (int)((Defines.fontSize + Defines.width/180)*(counter+1));
+            height /= Defines.zoom;
         }
     
         public static void Continue(){
@@ -148,29 +149,38 @@ public class Dialogue {
         }
     }
 
-    public void paintComponent(Graphics g, Camera cam){
+    public void paintComponent(Graphics g, Game game){
         if (showingIdx == -1 || !this.exists)
             return;
-
-        cam.untranslate((Graphics2D) g);
 
         ((Graphics2D) g).setRenderingHint(
             RenderingHints.KEY_TEXT_ANTIALIASING,
             RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
 
-        g.setColor(Color.lightGray);
-        g.fillRoundRect(Defines.width/160, Defines.height - height - Defines.width/80,
-                        Defines.width - (Defines.width/80), height + Defines.width/160,
-                        Defines.width/160, Defines.width/160);
+        g.setColor(new Color(200, 200, 200, 100));
+        
+        int x = (int)((game.player.getX() - (Defines.width/Defines.zoom - (Defines.width/80/Defines.zoom))/2));
+        int y = (int)((game.player.getY() - (Defines.height/2/Defines.zoom)));
+
+        g.fillRoundRect(x,
+                        y,
+                        (int)(Defines.width/Defines.zoom - (Defines.width/25)),
+                        (int)(height + Defines.width/32/Defines.zoom),
+                        (int)(Defines.width/80/Defines.zoom),
+                        (int)(Defines.width/80/Defines.zoom));
 
         g.setColor(Color.black);
 
         int posX = Defines.width/80;
         int posY = Defines.height - height + Defines.width/160;
+
+        posX = (int)((game.player.getX() - (Defines.width/Defines.zoom - (Defines.width/80/Defines.zoom))/2));
+        posY = (int)((game.player.getY() - (Defines.height/2.2/Defines.zoom)));
+
         for (int i = 0; i < showing.length(); i++){
             if (showing.charAt(i) == '@'){
-                posY += Defines.width/320 + Defines.fontSize;
-                posX = Defines.width/80;
+                posY += Defines.width/8000/Defines.zoom + Defines.fontSize;
+                posX = (int)((game.player.getX() - (Defines.width/Defines.zoom - (Defines.width/80/Defines.zoom))/2));
                 continue;
             }
 
@@ -181,7 +191,5 @@ public class Dialogue {
 
             posX += Defines.fontMetrics.stringWidth("" + showing.charAt(i));
         }
-
-        cam.translate((Graphics2D) g);
     }
 }

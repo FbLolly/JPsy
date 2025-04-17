@@ -126,15 +126,15 @@ public class Map {
         }
     }
 
-    public void paintLighting(Graphics g, ImageList imageList, Camera cam){
+    public void paintLighting(Graphics g, Game game){
         if (this.lit)
             return;
 
-        cam.untranslate((Graphics2D) g);
-
-        cam.paintImage(Defines.getCurrentAnimationImage(imageList.getImages("0", Defines.width, Defines.height)), Defines.getNonScaledX(1), Defines.getNonScaledY(1), g);
-
-        cam.translate((Graphics2D) g);
+        game.cam.paintImage(Defines.getCurrentAnimationImage(game.imageList.getImages("0",
+                            (int)(Defines.width/Defines.zoom) + Defines.tileSize,
+                            (int)(Defines.height/Defines.zoom) + Defines.tileSize)),
+                            (int)(game.player.getX() - Defines.width/Defines.zoom/1.85),
+                            (int)(game.player.getY() - Defines.height/Defines.zoom/1.8), g);
     }
 
     public boolean isValidPoint(Point p){

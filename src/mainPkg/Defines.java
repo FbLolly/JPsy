@@ -21,7 +21,7 @@ public class Defines {
 	public static int animationTimer = 0;
 	public static final int maxSlow = 5;
 
-	public static final float fontSize = 20f;
+	public static final float fontSize = 12f;
 
 	public static final int width = 1600;
 	public static final int height = 900;
@@ -31,10 +31,10 @@ public class Defines {
 	public static final double defaultSpeed = 3;
 	public static final double runningSpeed = 7;
 
-	public static final int tileSize = Defines.width/50;
-	public static final int invTileSize = Defines.width/35;
-	public static final int invItemSize = Defines.width/40;
-	public static final int selectedInvSize = Defines.width/33;
+	public static final int tileSize = Defines.width/30;
+	public static final int invTileSize = Defines.width/45;
+	public static final int invItemSize = Defines.width/50;
+	public static final int selectedInvSize = Defines.width/38;
 
 	public static final int lighterDurability = 20;
 
