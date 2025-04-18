@@ -76,7 +76,6 @@ public class Player extends Entity {
         if (this.inputMap.get("SPACE") == 1){
             this.setSpeedX(this.getSpeedX() * 1.5);
             this.setSpeedY(this.getSpeedY() * 1.5);
-            Defines.timer = 1;
 
             if (this.movement.equals("walking"))
                 this.movement = "running";

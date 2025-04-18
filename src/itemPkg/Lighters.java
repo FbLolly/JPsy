@@ -10,12 +10,10 @@ import particlesPkg.Particles;
 import utilsPkg.RayPoint;
 
 public class Lighters extends Item {
-    private int durability;
-
     public Lighters() {
         super(105);
 
-        this.durability = 20;
+        this.attributes.put("durability", 20);
         this.ID = "Item@Lighters";
     }
 
@@ -24,12 +22,12 @@ public class Lighters extends Item {
     }
 
     public int activate(Game game){
-        this.durability--;
+        this.attributes.put("durability", (Integer)this.attributes.get("durability")-1);
 
         RayPoint playerGraphicalPoint = game.player.getPoint();
         playerGraphicalPoint.x += Defines.tileSize/2;
 
-        if (this.durability <= 0){
+        if ((Integer)this.attributes.get("durability") <= 0){
             Particles.addParticle(playerGraphicalPoint.toPoint(), new Point(0, 0), "matchFail", 0, 2, 30);
 
             return -1; //Death signal
@@ -46,6 +44,6 @@ public class Lighters extends Item {
     }
 
     public void paintComponent(Graphics g, Point pos, ImageList imageList){
-        DurabilityItem.paint(g, pos, type, durability, imageList);
+        DurabilityItem.paint(g, pos, type, (Integer)this.attributes.get("durability"), imageList);
     }
 }
