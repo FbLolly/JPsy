@@ -143,9 +143,9 @@ public class Player extends Entity {
         inv.update(game);
 
         if (!game.map.isValidPoint(Map.getMapPosFromPoint(x, y))){
-            Save.saveEverything(game);
-
             game.map = new Map(game.map.nextRoom, game);
+
+            Save.saveEverything(game);
 
             RayPoint pos = game.map.getSpawn();
             this.x = pos.x;

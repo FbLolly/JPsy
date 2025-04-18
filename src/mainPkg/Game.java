@@ -54,6 +54,8 @@ public class Game {
 
         this.particles = new Particles();
         this.app = app;
+
+        //Save.loadSave(this);
     }
 
     public void updateIO(){

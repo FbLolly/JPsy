@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import itemPkg.Candle;
 import itemPkg.Item;
+import itemPkg.Lighters;
 import mainPkg.Defines;
 import mainPkg.Game;
 
@@ -18,21 +19,23 @@ public class Inventory {
         selected = 0;
     }
 
-    public Inventory(String[] items, Integer count){ //count is only needed if there is a chandellier
-        inv = new Item[Defines.inventorySize];
+    public Inventory(Item[] inv){
+        for (int i = 0; i < Defines.inventorySize; i++){
+            if (inv[i] == null)
+                continue;
 
-        if (items.length > Defines.inventorySize){
-            System.err.println("Item inventory load overflow");
-            return;
-        }
-        
-        selected = 0;
-
-        for (int i = 0; i < items.length; i++){
-            switch (items[i]) {
-                
+            switch (inv[i].type){
+                case 100:
+                    inv[i] = new Candle(inv[i].attributesInt, inv[i].attributesBool);
+                break;
+                case 105:
+                    inv[i] = new Lighters(inv[i].attributesInt, inv[i].attributesBool);
+                break;
             }
         }
+
+        this.inv = inv;
+        selected = 0;
     }
 
     public void update(Game game){

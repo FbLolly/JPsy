@@ -3,12 +3,13 @@ package saves;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import GameObjectPkg.Inventory;
 import GameObjectPkg.Player;
 import gameManagement.Map;
-import itemPkg.Candle;
+import itemPkg.Item;
 import mainPkg.Defines;
 import mainPkg.Game;
 
@@ -21,10 +22,13 @@ public class Save {
 
     public static void savePlayer(Player player){
         FileWriter file = null;
+        String add = "";
 
         try{
             file = new FileWriter("src/saves/player.txt");
-            file.append(player.getX() + "\n" + player.getY() + "\n\n");
+            add += player.getX() + "\n" + player.getY() + "\n\n";
+
+            file.write(Encrypter.Encrypt(add));
             file.close();
 
             Save.saveInventory(player.inv);
@@ -35,24 +39,32 @@ public class Save {
 
     public static void saveInventory(Inventory inv){
         FileWriter file = null;
+        String add = "";
         
         try{
             file = new FileWriter("src/saves/inventory.txt");
+            file.write("");
             
             for (int i = 0; i < inv.inv.length; i++){
                 if (inv.inv[i] == null){
-                    file.append("\n");
+                    add += "\n";
                     continue;
                 }
 
-                file.append(inv.inv[i].ID + "\n");
-                if (!(inv.inv[i] instanceof Candle))
-                    continue;
+                add += inv.inv[i].type + "\n" + inv.inv[i].attributesInt.size() + "\n";
                 
-                Candle c = (Candle)inv.inv[i];
-                file.append(""+c.getCandleCount());
+                for (String s : inv.inv[i].attributesInt.keySet())
+                    add += s + " " + inv.inv[i].attributesInt.get(s) + "\n";
+
+                add += inv.inv[i].attributesBool.size() + "\n";
+                
+                for (String s : inv.inv[i].attributesBool.keySet())
+                    add += s + " " + inv.inv[i].attributesBool.get(s) + "\n";
+
+                add += "\n\n";
             }
 
+            file.write(Encrypter.Encrypt(add));
             file.close();
         }catch (IOException e){
             e.printStackTrace();
@@ -61,34 +73,39 @@ public class Save {
 
     public static void saveSingleMap(Map map){
         FileWriter file = null;
+        String add = "";
 
         try{
             file = new FileWriter("src/saves/mapSave.txt");
 
-            file.write("");
-            file.append(map.lit + "\n\n");
-            file.append(map.start + "\n\n");
-            file.append(map.width + "\n" + map.height + "\n\n");
-            file.append(map.nextRoom + "\n");
+            add += map.lit + "\n\n";
+            add += map.start + "\n\n";
+            add += map.width + "\n" + map.height + "\n\n";
+            add += map.nextRoom + "\n";
             for (int i = 0; i < map.height; i++){
                 for (int ii = 0; ii < map.width; ii++){
                     int prntNum = map.map[ii][i].type;
 
+                    if (prntNum > 10 && prntNum < 14)
+                        prntNum = 10;
+                    
                     if (prntNum <= 9)
-                        file.append("0");
-                    file.append(prntNum + " ");
+                        add += "0";
+                    add += prntNum + " ";
                 }
-                file.append("\n");
+                add += "\n";
             }
 
-            file.append("\n\n\n");
+            add += "\n\n\n";
             for (int i = 0; i < map.interactibles.size(); i++){
                 if (map.map[map.interactibles.get(i).x][map.interactibles.get(i).y].type >= 10 &&
                 map.map[map.interactibles.get(i).x][map.interactibles.get(i).y].type < 14)
                     continue;
 
-                file.append(map.interactibles.get(i).x + " " + map.interactibles.get(i).y + "\n");
+                add += map.interactibles.get(i).x + " " + map.interactibles.get(i).y + "\n";
             }
+
+            file.write(Encrypter.Encrypt(add));
             file.close();
         } catch(IOException e){
             e.printStackTrace();
@@ -96,13 +113,18 @@ public class Save {
     }
 
     public static void loadSingleMap(Game game){
-        game.map.load(game.map.getClass().getResourceAsStream("../saves/mapSave.txt"), game, 99999);
+        String s = StringInputStream.fileToString(game.map.getClass().getResourceAsStream("../saves/mapSave.txt"));
+        InputStream is = StringInputStream.StringToFile(Encrypter.Decrypt(s));
+
+        game.map.load(is, game, 99999);
     }
 
     public static void loadInventory(Game game){
-        String it[] = new String[Defines.inventorySize];
+        Item items[] = new Item[Defines.inventorySize];
         InputStream is = game.getClass().getResourceAsStream("../saves/inventory.txt");
-        Integer count = null;
+        String s = Encrypter.Decrypt(StringInputStream.fileToString(is));
+        is = StringInputStream.StringToFile(s);
+
         if (is == null){
             System.err.println("INVENTORY SAVE FILE NOT FOUND");
             return;
@@ -112,38 +134,34 @@ public class Save {
         for (int i = 0; i < Defines.inventorySize; i++){
             if (!scan.hasNext()){
                 scan.close();
-                return;
+                break;
             }
 
-            it[i] = scan.next();
+            int type;
+            HashMap<String, Integer> attInt = new HashMap<>();
+            HashMap<String, Boolean> attBool = new HashMap<>();
 
-            if (it[i].equals("Item@Candle")){
-                count = scan.nextInt();
+            type = scan.nextInt();
+
+            int nint = scan.nextInt();
+            for (int ii = 0; ii < nint; ii++){
+                attInt.put(scan.next(), scan.nextInt());
             }
+
+            int nbool = scan.nextInt();
+            for (int ii = 0; ii < nbool; ii++){
+                attBool.put(scan.next(), scan.nextBoolean());
+            }
+
+            items[i] = new Item(type, attInt, attBool);
         }
 
-        game.player.inv = new Inventory(it, count);
+        game.player.inv = new Inventory(items);
         scan.close();
     }
 
     public static void loadSave(Game game){
-        InputStream is = game.getClass().getResourceAsStream("../saves/player.txt");
-        if (is == null){
-            System.err.println("ERROR, COULDNT FIND PLAYER SAVEFILE");
-            return;
-        }
-        
-        Scanner scan = new Scanner(is);
-        game.player = new Player(scan.nextDouble(), scan.nextDouble(), Defines.tileSize, Defines.tileSize);
-        scan.close();
-
-        is = game.getClass().getResourceAsStream("../saves/inventory.txt");
-        if (is == null){
-            System.err.println("ERROR, COULDNT FIND INVENTORY SAVEFILE");
-            return;
-        }
-        scan = new Scanner(is);
-        
-        scan.close();
+        Save.loadInventory(game);
+        Save.loadSingleMap(game);
     }
 }

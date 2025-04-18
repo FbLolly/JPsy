@@ -14,6 +14,8 @@ import itemPkg.Lighters;
 public class Defines {
 	public static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 
+	public static final String key = "KEYKEYKEY_VIGENEREKEY";
+
 	public static int FPS = 60;
 	public static int waiting = FPS;
 

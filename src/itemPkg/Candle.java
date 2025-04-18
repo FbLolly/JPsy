@@ -4,6 +4,7 @@ import mainPkg.Defines;
 import mainPkg.Game;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.HashMap;
 
 import graphicsPkg.ImageList;
 
@@ -13,33 +14,41 @@ public class Candle extends Item {
 
         this.ID = "Item@Candle";
 
-        this.attributes.put("candleCount", 0);
-        this.attributes.put("lit", false);
+        this.attributesInt.put("candleCount", 0);
+        this.attributesBool.put("lit", false);
+    }
+    public Candle(HashMap<String, Integer> ints, HashMap<String, Boolean> bools) {
+        super(100);
+
+        this.ID = "Item@Candle";
+
+        this.attributesInt = ints;
+        this.attributesBool = bools;
     }
 
     public int getCandleCount(){
-        return (Integer)this.attributes.get("candleCount");
+        return this.attributesInt.get("candleCount");
     }
     public void setCandleCount(int candleCount){
-        this.attributes.put("candleCount", candleCount);
+        this.attributesInt.put("candleCount", candleCount);
     }
     
     public void addCandle(){
-        if ((Integer)this.attributes.get("candleCount") > 3)
+        if (this.attributesInt.get("candleCount") > 3)
             return;
 
-        this.attributes.put("candleCount", (Integer)(this.attributes.get("candleCount"))+1);
+        this.attributesInt.put("candleCount", this.attributesInt.get("candleCount")+1);
     }
 
     public void light(){
-        if ((Integer)this.attributes.get("candleCount") != 3)
+        if (this.attributesInt.get("candleCount") != 3)
             return;
 
-        this.attributes.put("lit", true);
+        this.attributesBool.put("lit", true);
     }
     
     public void update(Game game){
-        if (!(Boolean)this.attributes.get("lit"))
+        if (!this.attributesBool.get("lit"))
             return;
         
         game.map.lit = true;
@@ -47,8 +56,8 @@ public class Candle extends Item {
 
     public void paintComponent(Graphics g, Point pos, ImageList imageList){
         int add = 0;
-        if ((Boolean)this.attributes.get("lit")) add++;
+        if (this.attributesBool.get("lit")) add++;
         
-        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(""+(this.type + (Integer)this.attributes.get("candleCount") + add), (int)Defines.invItemSize, (int)Defines.invItemSize)), pos.x, pos.y, null);
+        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(""+(this.type + this.attributesInt.get("candleCount") + add), (int)Defines.invItemSize, (int)Defines.invItemSize)), pos.x, pos.y, null);
     }
 }

@@ -7,16 +7,26 @@ import java.util.HashMap;
 import graphicsPkg.ImageList;
 import mainPkg.Game;
 
-public abstract class Item {
-    protected int type;
+public class Item {
+    public int type;
     public String ID;
-    protected HashMap<String, Object> attributes;
+    public HashMap<String, Integer> attributesInt;
+    public HashMap<String, Boolean> attributesBool;
 
     public Item(int type){
         this.type = type;
 
         this.ID = "Item@Default";
-        attributes = new HashMap<>();
+        attributesInt = new HashMap<>();
+        attributesBool = new HashMap<>();
+    }
+
+    public Item(int type, HashMap<String, Integer> ints, HashMap<String, Boolean> bools){
+        this.type = type;
+        
+        this.ID = "Item@Default";
+        attributesInt = ints;
+        attributesBool = bools;
     }
 
     public void update(Game game){
