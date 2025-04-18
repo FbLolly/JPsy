@@ -49,7 +49,7 @@ public class Defines {
 	public static final Color bgc = new Color(37, 19, 26);
 	public static final int floors = 4;
 
-	public static double zoom = 1.5;
+	public static double zoom = 2;
 	public static boolean scale = true;
 
 	public static final boolean[] collidable = {false, true, true, true, true, true, true, true, true};

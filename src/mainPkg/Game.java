@@ -33,8 +33,6 @@ public class Game {
     public KeyHandler keyHandler;
     private Mouse mouse;
 
-    private Overlay overlay;
-
     Particles particles;
 
     private JApp app; //only used for input, nothing else
@@ -56,9 +54,6 @@ public class Game {
 
         this.particles = new Particles();
         this.app = app;
-
-        this.overlay = new Overlay(this);
-        this.app.add(this.overlay);
     }
 
     public void updateIO(){
@@ -110,6 +105,7 @@ public class Game {
       this.particles.paintComponent(g, imageList);
 
       this.map.paintLighting(g, this);
+      this.deathTimer.paintComponent(g, this);
       this.player.paintInventory(g, this);
       this.dialogue.paintComponent(g, this);
     }

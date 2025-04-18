@@ -8,7 +8,7 @@ import GameObjectPkg.DeathTimer;
 import GameObjectPkg.Player;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
-import utilsPkg.Camera;
+import mainPkg.Game;
 
 public class Eyes {
     private Point playerPos;
@@ -85,12 +85,14 @@ public class Eyes {
         }
     }
 
-    public void paintStatic(Graphics g, ImageList imageList, Camera cam){
+    public void paintStatic(Graphics g, Game game){
         if (!this.noise)
             return;
         if (!this.start)
             return;
         
-        g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages("noise", (int)Defines.width, (int)Defines.height)), 0, 0, null);
+        g.drawImage(Defines.getCurrentAnimationImage(game.imageList.getImages("noise", (int)(Defines.width/Defines.zoom), (int)(Defines.height/Defines.zoom))),
+                    (int)(game.player.getX() - Defines.width/2/Defines.zoom),
+                    (int)(game.player.getY() - Defines.height/2/Defines.zoom), null);
     }
 }
