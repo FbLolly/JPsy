@@ -2,7 +2,6 @@ package utilsPkg;
 
 import mainPkg.Defines;
 import mainPkg.Game;
-import mainPkg.JApp;
 
 public class Zoomer {
     private static double action = 0;
