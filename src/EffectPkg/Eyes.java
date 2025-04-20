@@ -4,8 +4,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import GameObjectPkg.DeathTimer;
-import GameObjectPkg.Player;
+import GameObjectPkg.playerPkg.Player;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
 import mainPkg.Game;

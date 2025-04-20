@@ -1,6 +1,7 @@
 package mainPkg;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Image;
 import java.util.LinkedList;
@@ -19,11 +20,14 @@ public class Defines {
 	public static int FPS = 60;
 	public static int waiting = FPS;
 
+	public static int maxStamina = 60;
+
 	public static int timer = 0;
 	public static int animationTimer = 0;
 	public static final int maxSlow = 5;
 
-	public static final float fontSize = 12f;
+	public static final float fontSize = 20f;
+	public static Font font;
 
 	public static final int width = 1600;
 	public static final int height = 900;

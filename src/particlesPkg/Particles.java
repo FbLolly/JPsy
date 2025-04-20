@@ -61,9 +61,11 @@ public class Particles {
     }
 
     public void update(){
-        for (ObjectParticles objp : particles){
-            objp.update();
-        }
+        try{
+            for (ObjectParticles objp : particles){
+                objp.update();
+            }
+        } catch (Exception e){}
     }
 
     public void paintComponent(Graphics g, ImageList imageList){

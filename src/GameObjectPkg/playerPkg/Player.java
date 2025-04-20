@@ -1,9 +1,11 @@
-package GameObjectPkg;
+package GameObjectPkg.playerPkg;
 
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.HashMap;
 
+import GameObjectPkg.Entity;
+import GameObjectPkg.InteractiveObject;
 import gameManagement.Map;
 import graphicsPkg.ImageList;
 import mainPkg.Defines;
@@ -16,6 +18,8 @@ public class Player extends Entity {
     public HashMap<String, Integer> inputMap;
     public Point facing;
     public Inventory inv;
+    private Stamina stamina;
+    private boolean reset = false;
 
     public String gFacing = "";
     public String movement = "";
@@ -28,6 +32,8 @@ public class Player extends Entity {
 
         movement = "idle";
         gFacing = "down";
+
+        this.stamina = new Stamina(this);
     }
     
     public void loadInput(HashMap<String, Integer> map){
@@ -77,10 +83,17 @@ public class Player extends Entity {
             this.setSpeedX(this.getSpeedX() * 1.5);
             this.setSpeedY(this.getSpeedY() * 1.5);
 
+            if (!this.reset){
+                Defines.animationTimer = 0;
+                this.reset = true;
+            }
+
             if (this.movement.equals("walking"))
                 this.movement = "running";
 
             return;
+        }else{
+            this.reset = false;
         }
 
         if (this.getSpeedX() > Defines.defaultSpeed || this.getSpeedX() < -Defines.defaultSpeed)
@@ -161,11 +174,15 @@ public class Player extends Entity {
 
             Particles.addParticle(new Point((int)(this.x + Defines.tileSize/2.0), (int)(this.y + Defines.tileSize/2.0)), new Point(0, 0), "blood", 0.2, 0.4, 5);
         }
+
+        this.stamina.update();
     }
  
     public void paintComponent(Graphics g, ImageList imageList){
         g.drawImage(Defines.getCurrentAnimationImage(imageList.getImages(this.movement+"_"+this.gFacing, (int)Defines.tileSize*2, (int)Defines.tileSize*2)),
                     (int)(this.x - Defines.tileSize/2), (int)(this.y - Defines.tileSize), null);
+    
+        this.stamina.paintComponent(g);
     }
 
     public void paintInventory(Graphics g, Game game){

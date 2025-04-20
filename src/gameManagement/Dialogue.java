@@ -20,12 +20,14 @@ public class Dialogue {
     public static String showing;
     public static int showingIdx;
 
+    public int currentNum;
     public static int height;
     private boolean exists;
 
     public void refresh(int number){
         //loads dialogue.txt
         this.exists = true;
+        this.currentNum = number;
 
         dialogue = new LinkedList<>();
         names = new LinkedList<>();

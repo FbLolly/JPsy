@@ -3,10 +3,10 @@ package mainPkg;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import GameObjectPkg.DeathTimer;
+import EffectPkg.DeathTimer;
 import GameObjectPkg.Dog;
 import GameObjectPkg.Entity;
-import GameObjectPkg.Player;
+import GameObjectPkg.playerPkg.Player;
 import gameManagement.Dialogue;
 import gameManagement.Map;
 import gameManagement.ObjectEventHandler;
@@ -17,6 +17,7 @@ import utilsPkg.Camera;
 import utilsPkg.KeyHandler;
 import utilsPkg.Mouse;
 import utilsPkg.RayPoint;
+import utilsPkg.Zoomer;
 
 public class Game {
     public Map map;
@@ -33,9 +34,9 @@ public class Game {
     public KeyHandler keyHandler;
     private Mouse mouse;
 
-    Particles particles;
+    private Particles particles;
 
-    private JApp app; //only used for input, nothing else
+    public JApp app;
 
     public Game(JApp app){
         this.dialogue = new Dialogue();
@@ -93,6 +94,9 @@ public class Game {
         Defines.fontMetrics = g.getFontMetrics();
         Dialogue.updateShowing();
       }
+
+      Zoomer.update(this);
+      Zoomer.Zoom(2);
 
       ((Graphics2D) g).scale(Defines.zoom, Defines.zoom);
 

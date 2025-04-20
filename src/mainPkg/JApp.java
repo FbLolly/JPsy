@@ -26,8 +26,9 @@ public class JApp extends JPanel implements Runnable{
 		try {
     		InputStream is = this.getClass().getResourceAsStream("fonts/CaskaydiaCove-Bold.ttf"); //im forced to put it in the same pkg
     		Font f = Font.createFont(Font.TRUETYPE_FONT, is);
-    		Font sizedFont = f.deriveFont(Defines.fontSize);
-    		this.setFont(sizedFont);
+    		Font sizedFont = f.deriveFont((float)(Defines.fontSize/Defines.zoom));
+			Defines.font = sizedFont;
+    		this.setFont(Defines.font);
     	}catch (IOException | FontFormatException e) {
     		this.setFont(new Font("serif", Font.BOLD, 30));
     	}

@@ -2,6 +2,7 @@ package GameObjectPkg;
 
 import java.awt.Graphics;
 
+import GameObjectPkg.playerPkg.Player;
 import graphicsPkg.ImageList;
 import itemPkg.Candle;
 import itemPkg.Lighters;

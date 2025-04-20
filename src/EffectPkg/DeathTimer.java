@@ -1,9 +1,9 @@
-package GameObjectPkg;
+package EffectPkg;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-import EffectPkg.Eyes;
+import GameObjectPkg.playerPkg.Player;
 import gameManagement.Map;
 import mainPkg.Defines;
 import mainPkg.Game;

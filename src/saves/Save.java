@@ -6,8 +6,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import GameObjectPkg.Inventory;
-import GameObjectPkg.Player;
+import GameObjectPkg.playerPkg.Inventory;
+import GameObjectPkg.playerPkg.Player;
 import gameManagement.Map;
 import itemPkg.Item;
 import mainPkg.Defines;

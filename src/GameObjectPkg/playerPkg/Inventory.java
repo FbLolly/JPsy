@@ -1,4 +1,4 @@
-package GameObjectPkg;
+package GameObjectPkg.playerPkg;
 
 import java.awt.Graphics;
 import java.awt.Point;
@@ -87,8 +87,8 @@ public class Inventory {
     }
 
     public void paintComponent(Graphics g, Game game){
-        int defx = (int)game.player.x - (int)(Defines.invTileSize*1.5);
-        int defy = (int)game.player.y - (int)(Defines.invTileSize*1.5) - (int)Defines.invTileSize;
+        int defx = (int)game.player.getX() - (int)(Defines.invTileSize*1.5);
+        int defy = (int)game.player.getY() - (int)(Defines.invTileSize*1.5) - (int)Defines.invTileSize;
 
         for (int i = 0; i < Defines.inventorySize; i++){
             double size = 0;
