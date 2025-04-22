@@ -15,7 +15,6 @@ import itemPkg.Lighters;
 public class Defines {
     public static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 
-    public static final String key = "KEYKEYKEY_VIGENEREKEY";
     public static final int maxSlow = 5;
     public static final float fontSize = 20f;
     public static final int width = 1600;
