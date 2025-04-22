@@ -11,19 +11,19 @@ import javax.imageio.ImageIO;
 public class ImageList {
     private HashMap<String, LinkedList<Image>> imageMap;
 
-    public ImageList(){
+    public ImageList() {
         imageMap = new HashMap<>();
     }
 
-    public LinkedList<Image> getImages(String what, int width, int height){
+    public LinkedList<Image> getImages(String what, int width, int height) {
         if (imageMap.containsKey(what))
             return imageMap.get(what);
-        
+
         int times = 0;
 
         imageMap.put(what, new LinkedList<Image>());
-        
-        InputStream is = this.getClass().getResourceAsStream("images/"+what+"/exists.txt");
+
+        InputStream is = this.getClass().getResourceAsStream("images/" + what + "/exists.txt");
         if (is == null)
             return null;
 
@@ -31,28 +31,28 @@ public class ImageList {
         if (!scan.hasNextInt()) times = 1;
         else times = scan.nextInt();
         scan.close();
-        
+
         int idx = 1;
-        do{
-            is = this.getClass().getResourceAsStream("images/"+what+"/"+idx+".png");
+        do {
+            is = this.getClass().getResourceAsStream("images/" + what + "/" + idx + ".png");
             if (is == null)
                 continue;
 
-            try{
+            try {
                 Image img = ImageIO.read(is);
 
                 imageMap.get(what).add(img.getScaledInstance(width, height, Image.SCALE_DEFAULT));
-            }catch(Exception e){
+            } catch (Exception e) {
                 break;
             }
 
             idx++;
-        }while (is != null);
+        } while (is != null);
 
         LinkedList<Image> finalList = new LinkedList<>();
 
-        for (int i = 0; i < times; i++){
-            for (Image img : imageMap.get(what)){
+        for (int i = 0; i < times; i++) {
+            for (Image img : imageMap.get(what)) {
                 finalList.add(img);
             }
         }

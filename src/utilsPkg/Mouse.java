@@ -7,17 +7,17 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
-public class Mouse implements MouseListener{
+public class Mouse implements MouseListener {
     public int x, y;
     public boolean clicked;
 
-    public Mouse(){
+    public Mouse() {
         this.x = 0;
         this.y = 0;
     }
 
-    public void updateMousePos(JPanel panel){
-        try{
+    public void updateMousePos(JPanel panel) {
+        try {
             Point help = MouseInfo.getPointerInfo().getLocation();
 
             help.x -= panel.getLocationOnScreen().x;
@@ -25,7 +25,7 @@ public class Mouse implements MouseListener{
 
             this.x = help.x;
             this.y = help.y;
-        }catch(Exception e){
+        } catch (Exception e) {
             this.x = 0;
             this.y = 0;
         }

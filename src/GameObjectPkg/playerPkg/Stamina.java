@@ -10,19 +10,19 @@ public class Stamina {
     private int stamina;
     private Player player;
 
-    public Stamina(Player player){
+    public Stamina(Player player) {
         this.player = player;
 
         this.maxStamina = Defines.maxStamina;
         this.stamina = this.maxStamina;
     }
 
-    public void update(){
-        if (this.stamina <= 5 && this.player.movement.equals("running")){
+    public void update() {
+        if (this.stamina <= 5 && this.player.movement.equals("running")) {
             this.stamina = 0;
         }
 
-        if (this.stamina <= 0){
+        if (this.stamina <= 0) {
             this.player.movement = "idle";
             this.stamina = 1;
 
@@ -32,7 +32,7 @@ public class Stamina {
             return;
         }
 
-        if (player.movement.equals("running")){
+        if (player.movement.equals("running")) {
             this.stamina--;
             return;
         }
@@ -43,15 +43,15 @@ public class Stamina {
         this.stamina++;
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         g.setColor(Color.gray);
-        g.fillRoundRect((int)(player.getX()), (int)player.getY() + Defines.tileSize, Defines.tileSize, Defines.tileSize/15, Defines.tileSize/15, Defines.tileSize/15);
-        
+        g.fillRoundRect((int) (player.getX()), (int) player.getY() + Defines.tileSize, Defines.tileSize, Defines.tileSize / 15, Defines.tileSize / 15, Defines.tileSize / 15);
 
-        double percentage = (double)this.stamina/(double)this.maxStamina;
+
+        double percentage = (double) this.stamina / (double) this.maxStamina;
         percentage *= 100;
 
         g.setColor(Color.green);
-        g.fillRoundRect((int)(player.getX()), (int)player.getY() + Defines.tileSize, (int)(Defines.tileSize * percentage/100), Defines.tileSize/15, Defines.tileSize/15, Defines.tileSize/15);
+        g.fillRoundRect((int) (player.getX()), (int) player.getY() + Defines.tileSize, (int) (Defines.tileSize * percentage / 100), Defines.tileSize / 15, Defines.tileSize / 15, Defines.tileSize / 15);
     }
 }

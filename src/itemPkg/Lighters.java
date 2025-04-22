@@ -18,7 +18,7 @@ public class Lighters extends Item {
 
         this.attributesInt.put("durability", 20);
     }
-    
+
     public Lighters(HashMap<String, Integer> ints, HashMap<String, Boolean> bools) {
         super(105);
 
@@ -28,33 +28,33 @@ public class Lighters extends Item {
         this.attributesBool = bools;
     }
 
-    public void update(Game game){
+    public void update(Game game) {
 
     }
 
-    public int activate(Game game){
-        this.attributesInt.put("durability", this.attributesInt.get("durability")-1);
+    public int activate(Game game) {
+        this.attributesInt.put("durability", this.attributesInt.get("durability") - 1);
 
         RayPoint playerGraphicalPoint = game.player.getPoint();
-        playerGraphicalPoint.x += Defines.tileSize/2;
+        playerGraphicalPoint.x += Defines.tileSize / 2;
 
-        if (this.attributesInt.get("durability") <= 0){
+        if (this.attributesInt.get("durability") <= 0) {
             Particles.addParticle(playerGraphicalPoint.toPoint(), new Point(0, 0), "matchFail", 0, 2, 30);
 
             return -1; //Death signal
         }
 
-        if (Math.random()*100 > 50){
+        if (Math.random() * 100 > 50) {
             Particles.addParticle(playerGraphicalPoint.toPoint(), game.player.facing, "fire", 0, 3, 20);
 
             return 1;
         }
         Particles.addParticle(playerGraphicalPoint.toPoint(), RayPoint.pointToRayPoint(game.player.facing).getInverted().toPoint(), "matchFail", 0, 3, 10);
-        
+
         return 0;
     }
 
-    public void paintComponent(Graphics g, Point pos, ImageList imageList){
+    public void paintComponent(Graphics g, Point pos, ImageList imageList) {
         DurabilityItem.paint(g, pos, type, this.attributesInt.get("durability"), imageList);
     }
 }

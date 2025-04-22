@@ -7,7 +7,7 @@ import GameObjectPkg.Entity;
 import utilsPkg.RayRectangle;
 
 public class Collider {
-    public static void manageCollisions(Map map, Entity entity){
+    public static void manageCollisions(Map map, Entity entity) {
         Point p;
         RayRectangle playerRect;
 
@@ -18,11 +18,11 @@ public class Collider {
         playerRect = entity.getRect();
 
 
-        for (int i = p.x-2; i < p.x+2; i++){
-            for (int ii = p.y-2; ii < p.y+2; ii++){
+        for (int i = p.x - 2; i < p.x + 2; i++) {
+            for (int ii = p.y - 2; ii < p.y + 2; ii++) {
                 if (!map.isValidPoint(new Point(i, ii)))
                     continue;
-                    
+
                 if (!map.map[i][ii].isCollidable())
                     continue;
 

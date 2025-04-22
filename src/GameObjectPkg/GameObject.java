@@ -11,18 +11,18 @@ public abstract class GameObject {
     protected double x, y;
     protected double width, height;
 
-    public GameObject(double x, double y, double width, double height){
+    public GameObject(double x, double y, double width, double height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
     }
 
-    public void update(){
+    public void update() {
 
     }
 
-    public boolean outsideCamera(){
+    public boolean outsideCamera() {
         if (this.x < -Defines.cameraX - Defines.tileSize || this.y < -Defines.cameraY - Defines.tileSize)
             return true;
         if (this.x > -Defines.cameraX + Defines.width || this.y > -Defines.cameraY + Defines.height)
@@ -31,21 +31,22 @@ public abstract class GameObject {
         return false;
     }
 
-    public void paintComponent(Graphics g, ImageList imageList){
+    public void paintComponent(Graphics g, ImageList imageList) {
     }
 
-    public RayPoint getPoint(){
+    public RayPoint getPoint() {
         return new RayPoint(x, y);
     }
 
-    public RayRectangle getRect(){
+    public RayRectangle getRect() {
         return new RayRectangle(x, y, width, height);
     }
 
-    public double getX(){
+    public double getX() {
         return this.x;
     }
-    public double getY(){
+
+    public double getY() {
         return this.y;
     }
 }

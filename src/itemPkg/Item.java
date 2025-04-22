@@ -13,7 +13,7 @@ public class Item {
     public HashMap<String, Integer> attributesInt;
     public HashMap<String, Boolean> attributesBool;
 
-    public Item(int type){
+    public Item(int type) {
         this.type = type;
 
         this.ID = "Item@Default";
@@ -21,22 +21,22 @@ public class Item {
         attributesBool = new HashMap<>();
     }
 
-    public Item(int type, HashMap<String, Integer> ints, HashMap<String, Boolean> bools){
+    public Item(int type, HashMap<String, Integer> ints, HashMap<String, Boolean> bools) {
         this.type = type;
-        
+
         this.ID = "Item@Default";
         attributesInt = ints;
         attributesBool = bools;
     }
 
-    public void update(Game game){
+    public void update(Game game) {
 
     }
 
-    public int activate(Game game){
+    public int activate(Game game) {
         return 0;
     }
 
-    public void paintComponent(Graphics g, Point pos, ImageList imageList){
+    public void paintComponent(Graphics g, Point pos, ImageList imageList) {
     }
 }

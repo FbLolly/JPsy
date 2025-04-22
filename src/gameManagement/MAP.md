@@ -1,7 +1,9 @@
 #### MAP EXPLAINING
 
 ## FORMATTING
+
 # Lighting
+
 true/false
 true -> default lit up
 false -> not lit up, you are forced to have a chandellier to see
@@ -35,6 +37,7 @@ This map file generates a 5x5 map with the player in the middle and
 a chandellier on top.
 
 # WALLS
+
 01 -> topleft
 02 -> top
 03 -> topright
@@ -45,13 +48,16 @@ a chandellier on top.
 08 -> left
 
 # FLOOR
+
 00 -> random floor
 10 to 14 -> specific floor
 
 # PLAYER SPAWN
+
 -1 -> player spawn point
 
 # ITEMS
+
 20 -> chandellier
 21 -> single candle
 22 -> lighters

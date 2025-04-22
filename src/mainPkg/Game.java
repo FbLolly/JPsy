@@ -17,7 +17,6 @@ import utilsPkg.Camera;
 import utilsPkg.KeyHandler;
 import utilsPkg.Mouse;
 import utilsPkg.RayPoint;
-import utilsPkg.Zoomer;
 
 public class Game {
     public Map map;
@@ -30,12 +29,11 @@ public class Game {
     public ObjectEventHandler oeh;
     public DeathScreen ds;
     public KeyHandler keyHandler;
-    private Mouse mouse;
-
-    private Particles particles;
     public JApp app;
+    private Mouse mouse;
+    private Particles particles;
 
-    public Game(JApp app){
+    public Game(JApp app) {
         this.dialogue = new Dialogue();
         this.map = new Map(1, this);
         this.oeh = new ObjectEventHandler();
@@ -55,53 +53,55 @@ public class Game {
         this.particles = new Particles();
         this.app = app;
     }
-    
-    public void updateIO(){
+
+    public void updateIO() {
         this.keyHandler.handleKeys(this.app);
         this.mouse.updateMousePos(this.app);
     }
 
-    public void update(){
+    public void update() {
         this.updateIO();
         this.dialogue.update(this.keyHandler.KeyMap);
         this.cam.update(this.player);
         this.player.loadInput(this.keyHandler.KeyMap);
         this.player.update(this);
 
-        try{
+        try {
             this.dog.update(this);
-        }catch(NullPointerException e){}
-        
+        } catch (NullPointerException e) {
+        }
+
         this.deathTimer.update(this.map, this.player);
         this.particles.update();
         this.map.update(
-            new Entity[]{this.player, this.dog}
+                new Entity[]{this.player, this.dog}
         );
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         //paint background
         g.setColor(Defines.bgc);
         g.fillRect(0, 0, Defines.width, Defines.height);
         //-
 
-        if (Defines.fontMetrics == null){
+        if (Defines.fontMetrics == null) {
             Defines.fontMetrics = g.getFontMetrics();
             Dialogue.updateShowing();
         }
 
-        Zoomer.update(this);
-        Zoomer.Zoom(2);
+        //Zoomer.update(this);
+        //Zoomer.Zoom(2);
 
         ((Graphics2D) g).scale(Defines.zoom, Defines.zoom);
 
         this.cam.translate((Graphics2D) g);
         this.map.paintComponent(g, this.imageList, cam);
         this.player.paintComponent(g, this.imageList);
-        
-        try{
+
+        try {
             this.dog.paintComponent(g, imageList);
-        }catch(NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
 
         this.particles.paintComponent(g, imageList);
         this.map.paintLighting(g, this);
@@ -110,7 +110,7 @@ public class Game {
         this.dialogue.paintComponent(g, this);
     }
 
-    public void changeDialogue(int dialogue){
+    public void changeDialogue(int dialogue) {
         this.dialogue.refresh(dialogue);
     }
 }
