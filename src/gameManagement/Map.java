@@ -1,6 +1,7 @@
 package gameManagement;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import GameObjectPkg.Entity;
 import GameObjectPkg.InteractiveObject;
 import GameObjectPkg.MapObject;
 import graphicsPkg.ImageList;
+import graphicsPkg.TransparentImage;
 import mainPkg.Defines;
 import mainPkg.Game;
 import utilsPkg.Camera;
@@ -136,8 +138,20 @@ public class Map {
     }
 
     public void paintLighting(Graphics g, Game game) {
-        if (this.lit)
+        if (this.lit){
+            Image image = Defines.getCurrentAnimationImage(game.imageList.getImages("0-lit",
+            (int) (Defines.width / Defines.zoom) + Defines.tileSize,
+            (int) (Defines.height / Defines.zoom) + Defines.tileSize));
+
+            image = TransparentImage.getTransparentImage(image, 100);
+
+            game.cam.paintImage(image,
+            (int) (game.player.getX() - Defines.width / Defines.zoom / 1.85),
+            (int) (game.player.getY() - Defines.height / Defines.zoom / 1.8), g);
+
+
             return;
+        }
 
         game.cam.paintImage(Defines.getCurrentAnimationImage(game.imageList.getImages("0",
                         (int) (Defines.width / Defines.zoom) + Defines.tileSize,

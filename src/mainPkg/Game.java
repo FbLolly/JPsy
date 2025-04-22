@@ -7,6 +7,7 @@ import EffectPkg.DeathTimer;
 import GameObjectPkg.Dog;
 import GameObjectPkg.Entity;
 import GameObjectPkg.playerPkg.Player;
+import eventPkg.EventHandler;
 import gameManagement.Dialogue;
 import gameManagement.Map;
 import gameManagement.ObjectEventHandler;
@@ -32,6 +33,7 @@ public class Game {
     public JApp app;
     private Mouse mouse;
     private Particles particles;
+    private EventHandler eventHandler;
 
     public Game(JApp app) {
         this.dialogue = new Dialogue();
@@ -51,6 +53,7 @@ public class Game {
         this.mouse = new Mouse();
 
         this.particles = new Particles();
+        this.eventHandler = new EventHandler();
         this.app = app;
     }
 
@@ -76,6 +79,8 @@ public class Game {
         this.map.update(
                 new Entity[]{this.player, this.dog}
         );
+
+        this.eventHandler.update(this);
     }
 
     public void paintComponent(Graphics g) {

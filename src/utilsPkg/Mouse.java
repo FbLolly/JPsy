@@ -53,6 +53,6 @@ public class Mouse implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-        //
+        this.clicked = false;
     }
 }

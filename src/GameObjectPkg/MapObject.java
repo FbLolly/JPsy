@@ -31,7 +31,7 @@ public class MapObject extends GameObject {
         if (this.outsideCamera())
             return;
 
-        if (this.type >= 30 && this.type < 40) {
+        if (this.type >= 20 && this.type < 40) {
             //just a floor effect
 
             cam.paintImage(Defines.getCurrentAnimationImage(imageList.getImages("10", (int) Defines.tileSize, (int) Defines.tileSize)), (int) this.x, (int) this.y, g);

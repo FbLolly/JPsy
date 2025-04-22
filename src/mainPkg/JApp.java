@@ -10,6 +10,8 @@ import java.io.InputStream;
 
 import javax.swing.JPanel;
 
+import menusPkg.Menu;
+
 public class JApp extends JPanel implements Runnable {
     private double drawInterval;
     private double nextDrawTime;
@@ -18,7 +20,8 @@ public class JApp extends JPanel implements Runnable {
     private Thread thread;
     private boolean isWindows;
 
-    private Game game;
+    public Game game;
+    public Menu menu;
 
     public JApp() {
         this.isWindows();
@@ -41,7 +44,7 @@ public class JApp extends JPanel implements Runnable {
         this.setBounds(0, 0, Defines.width, Defines.height);
         this.setVisible(true);
 
-        game = new Game(this);
+        this.menu = new Menu(this);
 
         this.startGame();
     }
@@ -111,10 +114,20 @@ public class JApp extends JPanel implements Runnable {
     }
 
     private void update() {
+        if (this.game == null){
+            this.menu.update();
+            return;
+        }
+
         this.game.update();
     }
 
     public void paintComponent(Graphics g) {
+        if (this.game == null){
+            this.menu.paintComponent(g);
+            return;
+        }
+
         this.game.paintComponent(g);
     }
 }

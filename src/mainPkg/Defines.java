@@ -20,7 +20,7 @@ public class Defines {
     public static final float fontSize = 20f;
     public static final int width = 1600;
     public static final int height = 900;
-    public static final int buttonAnimationSpeed = 7;
+    public static final int buttonAnimationSpeed = 2;
     public static final double defaultSpeed = 3;
     public static final double runningSpeed = 7;
     public static final int tileSize = Defines.width / 30;
@@ -35,7 +35,7 @@ public class Defines {
     public static final int inventorySize = 4;
     public static int FPS = 60;
     public static int waiting = FPS;
-    public static int maxStamina = 60;
+    public static int maxStamina = FPS*2 - 10;
     public static int timer = 0;
     public static int animationTimer = 0;
     public static Font font;

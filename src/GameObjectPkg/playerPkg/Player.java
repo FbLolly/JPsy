@@ -171,7 +171,7 @@ public class Player extends Entity {
             if (Defines.timer % (int) (Defines.FPS / 4) != 0)
                 return;
 
-            Particles.addParticle(new Point((int) (this.x + Defines.tileSize / 2.0), (int) (this.y + Defines.tileSize / 2.0)), new Point(0, 0), "blood", 0.2, 0.4, 5);
+            Particles.addParticle(new Point((int) (this.x + Defines.tileSize / 2.0), (int) (this.y + Defines.tileSize / 2.0)), new Point(0, 0), "blood", 0.2, 0.4, 2);
         }
 
         this.stamina.update();
