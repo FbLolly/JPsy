@@ -128,6 +128,9 @@ public class JApp extends JPanel implements Runnable {
             return;
         }
 
-        this.game.paintComponent(g);
+        if (this.game.paintComponent(g) == 1){
+            this.game = null;
+            this.menu = new Menu(this);
+        }
     }
 }

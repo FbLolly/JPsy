@@ -3,10 +3,9 @@ package EffectPkg;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import GameObjectPkg.playerPkg.Player;
-import gameManagement.Map;
 import mainPkg.Defines;
 import mainPkg.Game;
+import menusPkg.JumpScare;
 
 public class DeathTimer {
     public int timer;
@@ -19,9 +18,12 @@ public class DeathTimer {
         this.timer = this.time;
     }
 
-    public void update(Map map, Player player) {
+    public void update(Game game) {
+        if (JumpScare.what != null)
+            return;
+
         this.lit = false;
-        if (map.lit) {
+        if (game.map.lit) {
             this.lit = true;
             return;
         }
@@ -32,7 +34,9 @@ public class DeathTimer {
         if (this.timer <= 0) {
             this.lit = true;
 
-            //kill the player
+            Defines.animationTimer = 0;
+            JumpScare.jumpscare("man-jumpscare");
+            return;
         }
 
         if (this.timer < this.time * (double) (2.0 / 3.0) && this.eyes == null) {
@@ -41,7 +45,7 @@ public class DeathTimer {
 
         if (this.eyes == null)
             return;
-        this.eyes.update(player, this);
+        this.eyes.update(game.player, this);
     }
 
     public void paintComponent(Graphics g, Game game) {

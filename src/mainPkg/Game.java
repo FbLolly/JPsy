@@ -13,6 +13,7 @@ import gameManagement.Map;
 import gameManagement.ObjectEventHandler;
 import graphicsPkg.ImageList;
 import menusPkg.DeathScreen;
+import menusPkg.JumpScare;
 import particlesPkg.Particles;
 import utilsPkg.Camera;
 import utilsPkg.KeyHandler;
@@ -34,6 +35,7 @@ public class Game {
     private Mouse mouse;
     private Particles particles;
     private EventHandler eventHandler;
+    public JumpScare jumpScare;
 
     public Game(JApp app) {
         this.dialogue = new Dialogue();
@@ -54,6 +56,7 @@ public class Game {
 
         this.particles = new Particles();
         this.eventHandler = new EventHandler();
+        this.jumpScare = new JumpScare();
         this.app = app;
     }
 
@@ -74,7 +77,7 @@ public class Game {
         } catch (NullPointerException e) {
         }
 
-        this.deathTimer.update(this.map, this.player);
+        this.deathTimer.update(this);
         this.particles.update();
         this.map.update(
                 new Entity[]{this.player, this.dog}
@@ -83,7 +86,7 @@ public class Game {
         this.eventHandler.update(this);
     }
 
-    public void paintComponent(Graphics g) {
+    public int paintComponent(Graphics g) {
         //paint background
         g.setColor(Defines.bgc);
         g.fillRect(0, 0, Defines.width, Defines.height);
@@ -113,6 +116,7 @@ public class Game {
         this.deathTimer.paintComponent(g, this);
         this.player.paintInventory(g, this);
         this.dialogue.paintComponent(g, this);
+        return this.jumpScare.paintComponent(g, this);
     }
 
     public void changeDialogue(int dialogue) {
