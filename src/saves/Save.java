@@ -30,8 +30,6 @@ public class Save {
 
             file.write(Encrypter.Encrypt(add));
             file.close();
-
-            Save.saveInventory(player.inv);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -160,8 +158,30 @@ public class Save {
         scan.close();
     }
 
+    public static void loadPlayer(Game game) {
+        InputStream is = game.getClass().getResourceAsStream("../saves/player.txt");
+        if (is == null){
+            System.out.println("PLAYER SAVEFILE NOT FOUND");
+            return;
+        }
+
+        String s = StringInputStream.fileToString(is);
+        s = Encrypter.Decrypt(s);
+        is = StringInputStream.StringToFile(s);
+
+        Scanner scan = new Scanner(is);
+
+        game.player.setX(scan.nextDouble());
+        game.player.setY(scan.nextDouble());
+
+        scan.close();
+    }
+
     public static void loadSave(Game game) {
+        game.dog = null;
+
         Save.loadInventory(game);
         Save.loadSingleMap(game);
+        Save.loadPlayer(game);
     }
 }

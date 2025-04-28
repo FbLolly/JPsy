@@ -16,7 +16,7 @@ public class JumpScare {
         if (what == null)
             return 0;
 
-        if (Defines.animationTimer >= (Defines.FPS*2)-10){
+        if (Defines.animationTimer >= (Defines.FPS*2)){
             return 1;
         }
         

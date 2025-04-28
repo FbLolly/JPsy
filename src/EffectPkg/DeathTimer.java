@@ -34,7 +34,7 @@ public class DeathTimer {
         if (this.timer <= 0) {
             this.lit = true;
 
-            Defines.animationTimer = 0;
+            Defines.animationTimer = 1;
             JumpScare.jumpscare("man-jumpscare");
             return;
         }

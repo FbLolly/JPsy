@@ -30,7 +30,7 @@ public class Defines {
     public static final Color bgc = new Color(37, 19, 26);
     public static final int floors = 4;
     public static final boolean[] collidable = {false, true, true, true, true, true, true, true, true};
-    public static final int standardDeathTimer = 10;
+    public static final int standardDeathTimer = 60;
     public static final int inventorySize = 4;
     public static int FPS = 60;
     public static int waiting = FPS;
