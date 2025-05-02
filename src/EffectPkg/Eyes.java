@@ -3,6 +3,8 @@ package EffectPkg;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import GameObjectPkg.playerPkg.Player;
 import graphicsPkg.ImageList;
@@ -14,6 +16,7 @@ public class Eyes {
     private Point playerPos;
     private boolean start;
     private boolean noise;
+    private Lock lock;
 
     private int counter;
 
@@ -22,12 +25,15 @@ public class Eyes {
         start = false;
         noise = false;
         counter = 0;
+        lock = new ReentrantLock();
 
         randoms.add(new Point(((int) (Math.random() * (Defines.width / 2)) - Defines.width / 4),
                 ((int) (Math.random() * (Defines.height / 2)) - Defines.height / 4)));
     }
 
     public void update(Player player, DeathTimer dt) {
+        lock.lock();
+
         this.playerPos = new Point((int) player.getX(), (int) player.getY());
 
         if (dt.lit) {
@@ -70,6 +76,8 @@ public class Eyes {
             return;
         }
         this.noise = true;
+
+        lock.unlock();
     }
 
     public void paintComponent(Graphics g, ImageList imageList) {

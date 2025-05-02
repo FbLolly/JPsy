@@ -55,7 +55,7 @@ public class Game {
         this.mouse = new Mouse();
 
         this.particles = new Particles();
-        this.eventHandler = new EventHandler();
+        this.eventHandler = new EventHandler(this);
         this.jumpScare = new JumpScare();
         this.app = app;
     }
@@ -82,8 +82,6 @@ public class Game {
         this.map.update(
                 new Entity[]{this.player, this.dog}
         );
-
-        this.eventHandler.update(this);
     }
 
     public int paintComponent(Graphics g) {

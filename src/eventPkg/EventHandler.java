@@ -4,19 +4,26 @@ import java.util.ArrayList;
 
 import mainPkg.Game;
 
-public class EventHandler {
+public class EventHandler implements Runnable{
     private static ArrayList<Event> events;
+    private Thread thread;
+    private Game game;
 
-    public EventHandler(){
+    public EventHandler(Game game){
         events = new ArrayList<>();
+        this.game = game;
+
+        thread = new Thread(this);
     }
 
-    public void update(Game game){
-        for (Event e : events){
-            e.eventTriggered(game);
-        }
+    public void run(){
+        while (thread != null){
+            for (Event e : events){
+                e.eventTriggered(game);
+            }
 
-        events = new ArrayList<>();
+            events.clear();
+        }
     }
 
     public static void addEvent(Event event){

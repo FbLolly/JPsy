@@ -1,17 +1,40 @@
 {LOCK
 Narrator
 
-Ur Locked
-}
-
-{
-Narrator
-
-puoi muoverti
+Please take some time to read this, Don't worry@
+The game timer for dark places that you see on top of you [ENTER]
 }
 
 {LOCK
 Narrator
 
-Locked Again, press enter to exit dialogue and unlock
+Is still unlesss you exit the dialogue@
+Here are the commands and a brief overview of the game [ENTER]
+}
+
+{
+Narrator
+
+You can now move, use [W, A, S, D] to move within the map@
+[SPACE] to sprint (keep in mind the bar below you is your stamina) [ENTER]
+}
+
+{LOCK
+Narrator
+
+During the game you will probably notice some items on the ground@
+That you can pick up/interact with using [E] [ENTER]
+}
+
+{LOCK
+Narrator
+
+Items in your inventory are instead interacted with using [F][ENTER]
+}
+
+{LOCK
+Narrator
+
+Do not be decieved, what seems to be an entry to the void is meerely@
+A gateway to the future...
 }
