@@ -32,7 +32,7 @@ public class Defines {
     public static final boolean[] collidable = {false, true, true, true, true, true, true, true, true};
     public static final int standardDeathTimer = 60;
     public static final int inventorySize = 4;
-    public static int FPS = 60;
+    public static int FPS = 5000;
     public static int waiting = FPS;
     public static int maxStamina = FPS*2 - 10;
     public static int timer = 0;
