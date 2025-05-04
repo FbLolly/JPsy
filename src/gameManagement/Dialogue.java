@@ -68,7 +68,7 @@ public class Dialogue {
             counter += 1;
         }
 
-        height = (int) ((Defines.fontSize + Defines.width / 180) * (counter + 1));
+        height = (int) ((Defines.fontSize + Defines.width / 180) * (counter + 1) + (Defines.fontSize));
         height /= Defines.zoom;
     }
 

@@ -24,6 +24,8 @@ public class DeathTimer {
 
         this.lit = false;
         if (game.map.lit) {
+            this.timer = this.time;
+
             this.lit = true;
             return;
         }

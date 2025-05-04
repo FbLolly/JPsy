@@ -1,0 +1,7 @@
+{LOCK
+Narrator
+
+Ouch, it looks like there is some garbage locking@
+the way to the next room!! you can use [E]@
+to interact with it and trash it away
+}

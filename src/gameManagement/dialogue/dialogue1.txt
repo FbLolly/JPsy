@@ -38,3 +38,10 @@ Narrator
 Do not be decieved, what seems to be an entry to the void is meerely@
 A gateway to the future...
 }
+
+{LOCK
+Narrator
+
+Now you should probably start running...@
+the timer isn't necessarily your friend
+}

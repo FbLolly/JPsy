@@ -3,6 +3,7 @@ package particlesPkg;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 import graphicsPkg.ImageList;
 
@@ -65,13 +66,16 @@ public class Particles {
             for (ObjectParticles objp : particles) {
                 objp.update();
             }
-        } catch (Exception e) {
+        } catch (ConcurrentModificationException e) {
         }
     }
 
     public void paintComponent(Graphics g, ImageList imageList) {
-        for (ObjectParticles objp : particles) {
-            objp.paintComponent(g, imageList);
+        try {
+            for (ObjectParticles objp : particles) {
+                objp.paintComponent(g, imageList);
+            }
+        } catch (ConcurrentModificationException e) {
         }
     }
 }

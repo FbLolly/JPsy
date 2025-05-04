@@ -1,0 +1,18 @@
+{LOCK
+Dev_team
+
+EOC (End of content)
+This was just a siple game that is possible@
+to realize with the NoTime game engine.@
+I hope the experience was enjoyable and happy@
+development!@
+}
+
+{LOCK
+Dev_team
+
+Thanks to the entire development team!@
+Edoardo Costantini@
+Andrea Ortolan@
+Santangelo Lorenzo (github: Fblolly, gitlab: FbRose)@
+}

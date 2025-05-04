@@ -1,0 +1,25 @@
+{LOCK
+Narrator
+
+ouch, its dark again... but now look!@
+There are some useful items on the ground!@
+}
+
+{LOCK
+Narrator
+
+You should try to collect the chandellier and put the candles on it!@
+}
+
+{LOCK
+Narrator
+
+Don't forget to grab the matches to light up the candles by@
+interacting with them while they are in your inventory [F]@
+}
+
+{LOCK
+Narrator
+
+Switch between items in your inventory with your number keys!
+}
